@@ -563,10 +563,10 @@ const PUZZLE_POOLS = {
     {q:'45 × 13 = ?', a:585, h1:'Розклади 13 на 10 і 3.', h2:'450 + 135 = 585.'}
   ],
   shafa: [
-    {q:'Порівняй: 5/9 __ 7/9', type:'mcq', options:['>','<','='], a:'<', h1:'У дробів однаковий знаменник — порівняй лише чисельники.', h2:'5 < 7, тому 5/9 < 7/9.'},
-    {q:'Порівняй: 8/11 __ 3/11', type:'mcq', options:['>','<','='], a:'>', h1:'Знаменники однакові — дивись тільки на чисельники.', h2:'8 > 3, тому 8/11 > 3/11.'},
-    {q:'Порівняй: 6/13 __ 9/13', type:'mcq', options:['>','<','='], a:'<', h1:'Порівняй чисельники: 6 і 9.', h2:'6 < 9, тому 6/13 < 9/13.'},
-    {q:'Порівняй: 7/15 __ 7/15', type:'mcq', options:['>','<','='], a:'=', h1:'Подивись уважно на чисельники.', h2:'7 = 7, тому 7/15 = 7/15.'}
+    {q:'Порівняй: 3/5 __ 4/7', type:'mcq', options:['>','<','='], a:'>', h1:'Зведи дроби до спільного знаменника або порівняй десяткові значення.', h2:'3/5 = 21/35, а 4/7 = 20/35, тому 3/5 > 4/7.'},
+    {q:'Порівняй: 5/8 __ 2/3', type:'mcq', options:['>','<','='], a:'<', h1:'Перемнож навхрест: 5×3 і 2×8.', h2:'15 < 16, тому 5/8 < 2/3.'},
+    {q:'Порівняй: 7/12 __ 3/5', type:'mcq', options:['>','<','='], a:'<', h1:'Порівняй 7×5 і 3×12.', h2:'35 < 36, тому 7/12 < 3/5.'},
+    {q:'Порівняй: 4/9 __ 5/11', type:'mcq', options:['>','<','='], a:'<', h1:'Перемнож навхрест.', h2:'4×11=44, а 5×9=45, тому 4/9 < 5/11.'}
   ],
   rostlina: [
     {seq:[3,6,12,24], a:48, h1:'Кожне число змінюється за одним і тим самим правилом.', h2:'Кожне наступне число вдвічі більше за попереднє: 24×2=48.'},
@@ -660,7 +660,7 @@ const PUZZLE_POOLS = {
   seif: [
     {clue:'Число парне. Більше 20 і менше 40. Ділиться на 6. Сума цифр дорівнює 6.', a:24},
     {clue:'Число парне. Більше 40 і менше 60. Ділиться на 8. Сума цифр дорівнює 12.', a:48},
-    {clue:'Число парне. Більше 60 і менше 80. Ділиться на 9. Сума цифр дорівнює 9.', a:72}
+    {clue:'Число парне. Більше 60 і менше 80. Ділиться на 9. Сума цифр дорівнює 18.', a:72}
   ],
   skrynya: [
     {pct:25, of:64, a:16, h1:'25% — це чверть.', h2:'64÷4=16.'},
@@ -736,7 +736,7 @@ const SCENES = {
       {id:'kartyna', label:'Плакат', kind:'puzzle', pool:'kartyna', storyIn:'На великому плакаті заховано геометричний слід.', storyOut:'За плакатом лежить третя картка.', giveLetter:'Р'},
       {id:'doshka_corridor', label:'Записка з кутами', kind:'puzzle', pool:'angles_note', storyIn:'На маленькій записці намальовано трикутник із двома відомими кутами.', storyOut:'Ти розв’язав записку з кутами. Тепер шлях далі відкритий.'},
       {id:'lavka', label:'Лавка', kind:'puzzle', pool:'lavka', storyIn:'На лавці лежить коротка записка із задачею.', storyOut:'Ти знаходиш ще один фрагмент маршруту.'},
-      {id:'vishak_corridor', label:'Шафка учня', kind:'puzzle', pool:'lavka', storyIn:'На дверцятах шафки приклеєна задача. Схоже, Спільношколярик хотів перевірити твою уважність.', storyOut:'Усередині шафки лежить записка: «Тепер шукай там, де рахують.»'}
+      {id:'vishak_corridor', label:'Рюкзак на лавці', kind:'puzzle', pool:'lavka', storyIn:'У рюкзаку на лавці — задача. Схоже, Спільношколярик хотів перевірити твою уважність.', storyOut:'У рюкзаку є записка: «Тепер шукай там, де рахують.»'}
     ]
   },
   office: {
@@ -801,13 +801,13 @@ const HOTSPOTS = {
     // Each zone hugs the actual object in corridor.png. No full-board or full-wall hit areas.
     dzvinok:[80.8,1.4,8.4,16.8],
     kartyna:[2.7,1.6,10.5,57.5],
-    doshka_corridor:[39,36,9,11],
+    doshka_corridor:[41.3,47.4,4.8,8.4],
     lavka:[14.6,72.0,19.0,15.0],
-    vishak_corridor:[90,45,10,30]
+    vishak_corridor:[16.0,57.0,9.5,16.0]
   },
   office:{
-    kalkulyator:[45,62,9,10], liniyka:[29.5,66.5,15,5.5], bloknot:[17,64,9,10],
-    computer:[25,49,14,15], korobka:[56,62,15,17], seif:[87,48,12,38]
+    kalkulyator:[45,62,9,10], liniyka:[29,74,19,5], bloknot:[17,64,9,10],
+    computer:[28,50,15,21], korobka:[56,62,15,17], seif:[87,48,12,38]
   },
   secretroom:{
     skrynya:[55,49,14,14], secret_map:[39,50,13,12], secret_lamp:[60,38,11,11],
@@ -1462,6 +1462,7 @@ function computePuzzleDisplay(){
   if(p.mode==='ruler') return {story:p.obj.storyIn,question:`Відрізок має довжину ${v.base} см. Другий відрізок у 3 рази довший. Яка його довжина?`,type:'input',answer:v.a,h1:v.h1,h2:v.h2};
   if(p.mode==='sequence') return {story:p.obj.storyIn,question:`${v.seq.join(' → ')} → ?`,type:'input',answer:v.a,h1:v.h1,h2:v.h2};
   if(p.mode==='percent') return {story:p.obj.storyIn,question:`${v.pct}% від ${v.of} = ?`,type:'input',answer:v.a,h1:v.h1,h2:v.h2};
+  if(v && v.now && v.target) return {story:p.obj.storyIn,question:`Годинник показує ${v.now}. Потрібно дочекатися ${v.target}. Скільки хвилин мине?`,type:'input',answer:v.a,h1:v.h1,h2:v.h2};
   if(p.mode==='safe') return {story:p.obj.storyIn,question:v.clue,type:'input',answer:v.a,h1:'Перевір кожну умову по черзі.',h2:`Підходить число ${v.a}.`};
   if(p.mode==='triple'){ const task=v[p.tripleIndex]; return {story:`Замок ${p.tripleIndex+1} із 3`,question:task.q,type:task.type||'input',options:task.options,answer:task.a,h1:'Розв’яжи задачу крок за кроком.',h2:'Перевір обчислення ще раз.'}; }
   return {story:p.obj.storyIn,question:v.q,type:v.type||'input',options:v.options,answer:v.a,h1:v.h1,h2:v.h2};
