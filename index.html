@@ -256,64 +256,6 @@ a:focus-visible{
   width:100%;
   height:auto;
 }
-.illustration-wrap svg.scene-illustration{
-  display:block;
-  width:100%;
-  height:auto;
-}
-.scene-image-wrap{
-  position:relative;
-  width:100%;
-  aspect-ratio:3 / 2;
-  overflow:hidden;
-  background:#e9e5dc;
-}
-.scene-image{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:contain; display:block; user-select:none;
-}
-.scene-hotspot{
-  position:absolute; z-index:4;
-  transform:translate(-50%,-50%);
-  width:var(--w); height:var(--h);
-  border-radius:18px;
-  background:transparent;
-  border:2px solid transparent;
-  transition:background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
-}
-.scene-hotspot:hover,.scene-hotspot:focus-visible{
-  background:rgba(248,128,16,.13);
-  border-color:rgba(248,128,16,.8);
-  box-shadow:0 0 0 3px rgba(255,255,255,.55), 0 0 18px rgba(248,128,16,.45);
-  transform:translate(-50%,-50%) scale(1.025);
-}
-.scene-hotspot.is-solved{
-  border-color:rgba(152,201,50,.35);
-}
-.scene-hotspot .found-dot{
-  position:absolute; right:6px; top:6px; width:28px; height:28px; border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  background:var(--lime); color:#24310d; font-weight:900;
-  box-shadow:0 4px 10px rgba(0,0,0,.18); opacity:0; transition:opacity .15s ease;
-}
-.scene-hotspot.is-solved .found-dot{opacity:1}
-.scene-clues-layer{position:absolute;inset:0;z-index:3;pointer-events:none;}
-.scene-clue{position:absolute;left:0;top:0;width:var(--w);height:var(--h);transform:translate(-50%,-50%) rotate(-2deg);pointer-events:none;border:0;border-radius:7px;padding:0 7px;background:#fffaf0;box-shadow:0 4px 12px rgba(0,0,0,.16);font:700 .72rem/1.15 Inter,system-ui,sans-serif;color:#575551;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s ease,box-shadow .15s ease;}
-.scene-clue::before{content:'';position:absolute;top:-5px;right:12px;width:18px;height:8px;border-radius:3px;background:rgba(248,128,16,.75);transform:rotate(4deg);}
-.scene-clue.clue-lime::before{background:rgba(152,201,50,.9);}
-.clue-paper-text{white-space:nowrap;}
-.dashboard{max-width:1100px; width:100%; text-align:left}
-.dashboard .panel{max-width:none}
-.dashboard-head{display:flex; justify-content:space-between; gap:14px; align-items:center; flex-wrap:wrap}
-.dashboard-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; margin:18px 0}
-.stat-card{background:var(--bg-soft); border-radius:14px; padding:16px}
-.stat-card .value{font-size:1.7rem; font-weight:900; color:var(--gray)}
-.report-table{width:100%; border-collapse:collapse; margin-top:16px; font-size:.9rem}
-.report-table th,.report-table td{padding:10px 8px; border-bottom:1px solid #e3e0d8; text-align:left; vertical-align:top}
-.report-table th{color:var(--gray); background:#faf9f6; position:sticky; top:0}
-.report-code{width:100%; min-height:120px; border:2px solid #dedbd2; border-radius:12px; padding:12px; font:inherit; resize:vertical}
-.report-code:focus{outline:3px solid rgba(248,128,16,.25); border-color:var(--orange)}
-@media (max-width:700px){.report-table{font-size:.78rem}.report-table th:nth-child(5),.report-table td:nth-child(5){display:none}}
 .hotspot{
   cursor:pointer;
   transform-box: fill-box;
@@ -565,6 +507,19 @@ a:focus-visible{
   *{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
 }
 
+
+/* ---------- supplied photographic scene ---------- */
+.photo-scene{position:relative;width:100%;aspect-ratio:3/2;overflow:hidden;border-radius:var(--radius-lg);background:#ddd;box-shadow:var(--shadow-soft);line-height:0;isolation:isolate}
+.scene-photo{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;background:#ddd;user-select:none;-webkit-user-drag:none}
+.photo-hotspot{position:absolute;z-index:3;padding:0;border:2px solid transparent;border-radius:14px;background:transparent;cursor:pointer;line-height:normal;transition:background .15s,border-color .15s,box-shadow .15s}
+.photo-hotspot:hover,.photo-hotspot:focus-visible{background:rgba(248,128,16,.08);border-color:rgba(248,128,16,.55);box-shadow:0 0 0 3px rgba(248,128,16,.12);outline:none}
+.photo-hotspot.solved{cursor:default}
+.photo-hotspot.solved:hover{background:rgba(152,201,50,.07);border-color:rgba(152,201,50,.35)}
+.solved-mark{position:absolute;right:6px;top:6px;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--lime);color:white;font-weight:900;font-size:18px;box-shadow:0 3px 8px rgba(0,0,0,.18)}
+.scene-clue{position:absolute;z-index:2;pointer-events:none;user-select:none;background:rgba(255,255,255,.95);color:var(--gray);font-family:var(--font-display);font-weight:900;line-height:1;padding:14px 18px;border-radius:16px;box-shadow:0 8px 18px rgba(0,0,0,.16);border:2px solid rgba(248,128,16,.25);font-size:clamp(15px,2.1vw,27px);white-space:nowrap}
+.plant-clue{left:5%;top:30%;transform:rotate(-2deg)}
+@media(max-width:700px){.stage-wrap{padding:10px 8px 24px}.photo-scene{border-radius:14px}.scene-clue{font-size:13px;padding:9px 11px;border-radius:11px}.plant-clue{left:2%;top:27%}.photo-hotspot{border-radius:10px}}
+
 </style>
 </head>
 <body>
@@ -584,7 +539,7 @@ const BOY_PORTRAIT = "data:image/webp;base64,UklGRgpXAABXRUJQVlA4WAoAAAAQAAAAVQE
 </script>
 <script>
 /* ==========================================================================
-   ТАЄМНИЦЯ ЗНИКЛОГО СПІЛЬНОШКОЛЯРИКА — FINAL game data
+   ТАЄМНИЦЯ ЗНИКЛОГО СПІЛЬНОШКОЛЯРИКА — game data
    Puzzle pools, dialogue, jokes, scene/object definitions.
    Edit this file to change math tasks, story text, or add new content.
    ========================================================================== */
@@ -601,131 +556,126 @@ const AGENT_NAMES = [
    type: 'input' (numeric answer) | 'mcq' (multiple choice)
    --------------------------------------------------------------------- */
 const PUZZLE_POOLS = {
-  // CLASSROOM — 6 core math investigations
   parta: [
-    {q:'24 × 13 = ?', a:312, h1:'Розклади 13 на 10 + 3.', h2:'24 × 10 = 240, 24 × 3 = 72, разом 312.'},
-    {q:'36 × 14 = ?', a:504, h1:'Розклади 14 на 10 + 4.', h2:'36 × 10 = 360, 36 × 4 = 144, разом 504.'},
-    {q:'47 × 12 = ?', a:564, h1:'Розклади 12 на 10 + 2.', h2:'47 × 10 = 470, 47 × 2 = 94, разом 564.'},
-    {q:'28 × 15 = ?', a:420, h1:'15 = 10 + 5.', h2:'28 × 10 = 280, 28 × 5 = 140, разом 420.'}
+    {q:'36 × 14 = ?', a:504, h1:'Розклади 14 на 10 і 4.', h2:'36×10 + 36×4 = 360 + 144 = 504.'},
+    {q:'48 × 12 = ?', a:576, h1:'Помнож на 10, а потім ще на 2.', h2:'480 + 96 = 576.'},
+    {q:'27 × 16 = ?', a:432, h1:'Розклади 16 на 10 і 6.', h2:'270 + 162 = 432.'},
+    {q:'45 × 13 = ?', a:585, h1:'Розклади 13 на 10 і 3.', h2:'450 + 135 = 585.'}
   ],
   shafa: [
-    {q:'Який дріб більший?', type:'mcq', options:['3/5','4/7','Вони рівні','Неможливо визначити'], a:'3/5', h1:'Приведи дроби до спільного знаменника або порівняй їх десяткові значення.', h2:'3/5 = 21/35, а 4/7 = 20/35, тому більший 3/5.'},
-    {q:'Який дріб більший?', type:'mcq', options:['5/8','2/3','Вони рівні','1/2'], a:'2/3', h1:'Порівняй 5/8 і 2/3 через спільний знаменник.', h2:'5/8 = 15/24, 2/3 = 16/24, тому більший 2/3.'},
-    {q:'Який дріб більший?', type:'mcq', options:['7/10','2/3','Вони рівні','3/5'], a:'7/10', h1:'Порівняй дроби через знаменник 30.', h2:'7/10 = 21/30, 2/3 = 20/30.'},
-    {q:'Який дріб більший?', type:'mcq', options:['3/4','5/7','Вони рівні','2/3'], a:'3/4', h1:'Порівняй дроби через спільний знаменник.', h2:'3/4 = 21/28, 5/7 = 20/28.'}
+    {q:'Порівняй: 3/5 __ 4/7', type:'mcq', options:['>','<','='], a:'>', h1:'Зведи дроби до спільного знаменника або порівняй десяткові значення.', h2:'3/5 = 21/35, а 4/7 = 20/35, тому 3/5 > 4/7.'},
+    {q:'Порівняй: 5/8 __ 2/3', type:'mcq', options:['>','<','='], a:'<', h1:'Перемнож навхрест: 5×3 і 2×8.', h2:'15 < 16, тому 5/8 < 2/3.'},
+    {q:'Порівняй: 7/12 __ 3/5', type:'mcq', options:['>','<','='], a:'<', h1:'Порівняй 7×5 і 3×12.', h2:'35 < 36, тому 7/12 < 3/5.'},
+    {q:'Порівняй: 4/9 __ 5/11', type:'mcq', options:['>','<','='], a:'<', h1:'Перемнож навхрест.', h2:'4×11=44, а 5×9=45, тому 4/9 < 5/11.'}
   ],
   rostlina: [
-    {seq:[3,6,12,24], a:48, h1:'Подивись не на різницю, а на те, у скільки разів змінюється число.', h2:'Кожне число множиться на 2.'},
-    {seq:[5,10,20,40], a:80, h1:'Спробуй поділити сусідні числа.', h2:'Кожне наступне число — у 2 рази більше.'},
-    {seq:[2,6,18,54], a:162, h1:'Знайди множник між сусідніми числами.', h2:'Кожного разу множимо на 3.'}
+    {seq:[3,6,12,24], a:48, h1:'Кожне число змінюється за одним і тим самим правилом.', h2:'Кожне наступне число вдвічі більше за попереднє: 24×2=48.'},
+    {seq:[5,10,20,40], a:80, h1:'Подивись, що відбувається при переході від одного числа до наступного.', h2:'Кожне число множимо на 2: 40×2=80.'},
+    {seq:[81,27,9,3], a:1, h1:'Числа зменшуються в однакову кількість разів.', h2:'Кожне число ділимо на 3: 3÷3=1.'},
+    {seq:[4,9,14,19], a:24, h1:'Знайди сталу різницю між сусідніми числами.', h2:'Щоразу додаємо 5: 19+5=24.'}
   ],
   godynnyk: [
-    {q:'Урок почався о 09:35 і тривав 45 хвилин. О котрій він закінчився?', a:'10:20', type:'mcq', options:['10:10','10:20','10:25','11:20'], h1:'Додай спочатку 25 хв до 10:00, потім решту.', h2:'09:35 + 25 хв = 10:00; ще 20 хв → 10:20.'},
-    {q:'Зараз 13:40. Через 35 хвилин буде...', a:'14:15', type:'mcq', options:['14:05','14:10','14:15','14:25'], h1:'До 14:00 залишається 20 хв.', h2:'20 + 15 = 35 хв, отже 14:15.'},
-    {q:'Перерва почалася о 11:25 і триває 20 хвилин. Коли вона закінчиться?', a:'11:45', type:'mcq', options:['11:35','11:40','11:45','12:05'], h1:'Додай 20 хвилин до 11:25.', h2:'25 + 20 = 45, отже 11:45.'}
+    {now:'08:35', target:'10:00', a:85, h1:'Спочатку знайди хвилини до 09:00, потім до 10:00.', h2:'25 хв + 60 хв = 85 хв.'},
+    {now:'14:20', target:'16:00', a:100, h1:'До 15:00 — 40 хв.', h2:'40 хв + 60 хв = 100 хв.'},
+    {now:'09:45', target:'11:15', a:90, h1:'До 10:00 — 15 хв, потім ще година і 15 хв.', h2:'15+60+15=90 хв.'},
+    {now:'12:10', target:'13:40', a:90, h1:'До 13:00 — 50 хв.', h2:'50+40=90 хв.'}
   ],
   ryukzak: [
-    {q:'У рюкзаку 84 наліпки. 3/7 з них — математичні. Скільки математичних наліпок?', a:36, h1:'Знайди 1/7 від 84, а потім помнож на 3.', h2:'84 ÷ 7 = 12; 12 × 3 = 36.'},
-    {q:'У коробці 96 олівців. 5/8 — кольорові. Скільки кольорових?', a:60, h1:'Спочатку знайди 1/8 від 96.', h2:'96 ÷ 8 = 12; 12 × 5 = 60.'},
-    {q:'У класі 30 зошитів. 2/5 — у клітинку. Скільки таких зошитів?', a:12, h1:'Знайди 1/5 від 30.', h2:'30 ÷ 5 = 6; 6 × 2 = 12.'}
+    {q:'3/4 від 28 = ?', a:21, h1:'Знайди 1/4 від 28, а потім помнож на 3.', h2:'28÷4=7; 7×3=21.'},
+    {q:'5/6 від 42 = ?', a:35, h1:'Знайди 1/6 від 42.', h2:'42÷6=7; 7×5=35.'},
+    {q:'7/10 від 80 = ?', a:56, h1:'Знайди 10% від 80.', h2:'10% від 80 = 8; 8×7=56.'},
+    {q:'2/5 від 45 = ?', a:18, h1:'Знайди 1/5 від 45.', h2:'45÷5=9; 9×2=18.'}
   ],
-  vikno: [
-    {q:'Знайди значення: 360 − 48 × 5 = ?', a:120, h1:'Спочатку виконай множення.', h2:'48 × 5 = 240; 360 − 240 = 120.'},
-    {q:'Знайди значення: 720 ÷ 8 + 35 = ?', a:125, h1:'Спочатку виконай ділення.', h2:'720 ÷ 8 = 90; 90 + 35 = 125.'},
-    {q:'Знайди значення: 450 − 72 ÷ 8 = ?', a:441, h1:'Спочатку виконай ділення.', h2:'72 ÷ 8 = 9; 450 − 9 = 441.'}
-  ],
-
-  // CORRIDOR — geometry, percentages, fractions, divisibility
   dzvinok: [
-    {q:'72 ÷ 6 + 18 = ?', a:30, h1:'Спочатку виконай ділення.', h2:'72 ÷ 6 = 12; 12 + 18 = 30.'},
-    {q:'144 ÷ 12 − 5 = ?', a:7, h1:'Спочатку поділи 144 на 12.', h2:'144 ÷ 12 = 12; 12 − 5 = 7.'},
-    {q:'96 ÷ 8 + 27 = ?', a:39, h1:'Спочатку виконай ділення.', h2:'96 ÷ 8 = 12; 12 + 27 = 39.'}
+    {q:'72 − 18 ÷ 3 × 2 = ?', a:60, h1:'Спочатку ділення й множення зліва направо.', h2:'18÷3=6; 6×2=12; 72−12=60.'},
+    {q:'90 − 24 ÷ 6 × 5 = ?', a:70, h1:'Спочатку 24÷6.', h2:'24÷6=4; 4×5=20; 90−20=70.'},
+    {q:'15 + 48 ÷ 6 × 2 = ?', a:31, h1:'Спочатку 48÷6.', h2:'48÷6=8; 8×2=16; 15+16=31.'},
+    {q:'100 − 36 ÷ 4 × 3 = ?', a:73, h1:'Ділення та множення виконуй зліва направо.', h2:'36÷4=9; 9×3=27; 100−27=73.'}
   ],
   kartyna: [
-    {q:'Периметр прямокутника зі сторонами 7 см і 4 см дорівнює...', type:'mcq', options:['11 см','18 см','22 см','28 см'], a:'22 см', h1:'Периметр — це сума всіх чотирьох сторін.', h2:'2 × (7 + 4) = 22 см.'},
-    {q:'Трикутник має сторони 6 см, 8 см і ? см. Периметр — 20 см. Знайди третю сторону.', type:'mcq', options:['4 см','5 см','6 см','8 см'], a:'6 см', h1:'Від периметра відніми дві відомі сторони.', h2:'20 − 6 − 8 = 6 см.'},
-    {q:'Один кут трикутника 50°, другий 60°. Третій дорівнює...', type:'mcq', options:['60°','70°','80°','90°'], a:'70°', h1:'Сума кутів трикутника — 180°.', h2:'180° − 50° − 60° = 70°.'},
-    {q:'Прямокутник має периметр 30 см, одна сторона 9 см. Інша сторона?', type:'mcq', options:['6 см','12 см','15 см','21 см'], a:'6 см', h1:'15 см — це сума двох різних сторін.', h2:'30 ÷ 2 = 15; 15 − 9 = 6 см.'}
+    {q:'У трикутнику два кути 48° і 67°. Який третій кут?', a:65, h1:'Сума кутів трикутника дорівнює 180°.', h2:'180−48−67=65°.'},
+    {q:'Периметр прямокутника 34 см, одна сторона 7 см. Яка друга сторона?', a:10, h1:'P=2(a+b).', h2:'a+b=17; 17−7=10 см.'},
+    {q:'Один відрізок 8 см, другий у 3 рази довший. Яка довжина другого?', a:24, h1:'«У 3 рази довший» означає помножити на 3.', h2:'8×3=24 см.'},
+    {q:'Периметр квадрата 36 см. Яка довжина його сторони?', a:9, h1:'У квадрата 4 рівні сторони.', h2:'36÷4=9 см.'}
   ],
-  plakat: [
-    {q:'Яке число ділиться і на 2, і на 3?', type:'mcq', options:['25','28','36','41'], a:'36', h1:'Перевір парність і суму цифр.', h2:'36 парне, а 3 + 6 = 9, яке ділиться на 3.'},
-    {q:'Яке число ділиться на 5?', type:'mcq', options:['42','57','65','74'], a:'65', h1:'Пригадай, якою цифрою має закінчуватися число.', h2:'Число, кратне 5, закінчується на 0 або 5.'},
-    {q:'Яке число ділиться на 9?', type:'mcq', options:['54','62','71','83'], a:'54', h1:'Знайди суму цифр.', h2:'5 + 4 = 9, тому 54 ділиться на 9.'}
+  doshka_corridor: [
+    {q:'У класі 30 учнів. 20% відвідали гурток. Скільки це учнів?', a:6, h1:'Знайди 10%, а потім подвоюй.', h2:'10% від 30 = 3; 20% = 6.'},
+    {q:'Квиток коштував 250 грн. Знижка 20%. Яка нова ціна?', a:200, h1:'Спочатку знайди 20% від 250.', h2:'20% = 50 грн; 250−50=200 грн.'},
+    {q:'У коробці 80 олівців. 25% — зелені. Скільки зелених?', a:20, h1:'25% — це чверть.', h2:'80÷4=20.'},
+    {q:'Ціну 400 грн збільшили на 10%. Яка стала ціна?', a:440, h1:'Знайди 10% від 400.', h2:'10% = 40; 400+40=440 грн.'}
   ],
   lavka: [
-    {q:'10% від 240 = ?', a:24, h1:'10% — це одна десята.', h2:'240 ÷ 10 = 24.'},
-    {q:'20% від 150 = ?', a:30, h1:'Знайди 10%, а потім подвой.', h2:'10% від 150 = 15; 20% = 30.'},
-    {q:'30% від 90 = ?', a:27, h1:'Знайди 10% і помнож на 3.', h2:'10% від 90 = 9; 9 × 3 = 27.'}
-  ],
-  vognegasnyk: [
-    {q:'Що більше?', type:'mcq', options:['25% від 80','10% від 200','Вони рівні','25% від 100'], a:'Вони рівні', h1:'Обчисли обидва значення.', h2:'25% від 80 = 20, 10% від 200 = 20.'},
-    {q:'Що більше?', type:'mcq', options:['20% від 150','10% від 250','Вони рівні','50% від 30'], a:'20% від 150', h1:'Порахуй значення трьох варіантів.', h2:'30, 25 і 15 — найбільше 30.'}
-  ],
-  vishak: [
-    {q:'Ціна рюкзака 600 грн. Знижка 10%. Яка нова ціна?', a:540, h1:'Знайди 10% від 600 і відніми від початкової ціни.', h2:'10% = 60; 600 − 60 = 540 грн.'},
-    {q:'Книжка коштувала 400 грн. Її подорожчали на 20%. Нова ціна?', a:480, h1:'20% від 400 — це 80.', h2:'400 + 80 = 480 грн.'}
-  ],
-
-  // OFFICE — more multi-step work
-  kalkulyator: [
-    {q:'36 × 14 − 120 = ?', a:384, h1:'Спочатку обчисли 36 × 14.', h2:'36 × 14 = 504; 504 − 120 = 384.'},
-    {q:'25 × 16 + 75 = ?', a:475, h1:'25 × 16 можна розкласти як 25 × 8 × 2.', h2:'25 × 16 = 400; 400 + 75 = 475.'},
-    {q:'48 × 12 − 96 = ?', a:480, h1:'Розклади 12 на 10 + 2.', h2:'48 × 12 = 576; 576 − 96 = 480.'}
-  ],
-  liniyka: [
-    {q:'Відрізок AB = 18 см. Точка C ділить його так, що AC = 7 см. Знайди CB.', a:11, h1:'Увесь відрізок — це AC + CB.', h2:'18 − 7 = 11 см.'},
-    {q:'Відрізок AB = 25 см. AC = 9 см. Знайди CB.', a:16, h1:'Від усього відрізка відніми відомий шматок.', h2:'25 − 9 = 16 см.'},
-    {q:'AB = 31 см, AC = 14 см. Знайди CB.', a:17, h1:'CB = AB − AC.', h2:'31 − 14 = 17 см.'}
-  ],
-  bloknot: [
-    {seq:[4,9,14,19], a:24, h1:'Подивись на різницю між сусідніми числами.', h2:'Кожного разу додаємо 5.'},
-    {seq:[7,14,21,28], a:35, h1:'Знайди сталий крок.', h2:'Кожного разу додаємо 7.'},
-    {seq:[30,27,24,21], a:18, h1:'Послідовність зменшується.', h2:'Кожного разу віднімаємо 3.'}
+    {q:'Пішохід пройшов 1,2 км, а потім ще 850 м. Скільки метрів загалом?', a:2050, h1:'Переведи 1,2 км у метри.', h2:'1,2 км=1200 м; 1200+850=2050 м.'},
+    {q:'З 60 сторінок прочитано 35. Скільки сторінок залишилось?', a:25, h1:'Від загальної кількості відніми прочитане.', h2:'60−35=25.'},
+    {q:'У коридорі 6 дверей. Біля кожних 2 дверей — один плакат. Скільки плакатів?', a:3, h1:'Поділи 6 на 2.', h2:'6÷2=3.'},
+    {q:'Лавка має довжину 180 см. Інша на 45 см коротша. Яка її довжина?', a:135, h1:'Потрібно відняти 45.', h2:'180−45=135 см.'}
   ],
   computer: [
-    {q:'У класі 40 учнів. 25% взяли участь у грі. Скільки це учнів?', a:10, h1:'25% — це чверть.', h2:'40 ÷ 4 = 10.'},
-    {q:'У коробці 80 карток. 30% — сині. Скільки синіх карток?', a:24, h1:'Знайди 10%, потім помнож на 3.', h2:'10% = 8; 30% = 24.'},
-    {q:'На рахунку 250 балів. Учень витратив 20%. Скільки балів залишилося?', a:200, h1:'Знайди 20% від 250, а потім відніми.', h2:'20% = 50; 250 − 50 = 200.'}
+    {q:'35% від 200 = ?', a:70, h1:'Знайди 10% і 5%.', h2:'20+20+20+10=70.'},
+    {q:'15% від 240 = ?', a:36, h1:'10% + 5%.', h2:'24+12=36.'},
+    {q:'30% від 150 = ?', a:45, h1:'Знайди 10% і помнож на 3.', h2:'15×3=45.'},
+    {q:'25% від 360 = ?', a:90, h1:'25% — це чверть.', h2:'360÷4=90.'}
+  ],
+  kalkulyator: [
+    {q:'48 × 23 = ?', a:1104, h1:'Розклади 23 на 20 і 3.', h2:'48×20=960; 48×3=144; разом 1104.'},
+    {q:'125 × 16 = ?', a:2000, h1:'16 — це 8×2.', h2:'125×16=2000.'},
+    {q:'72 × 15 = ?', a:1080, h1:'15 = 10+5.', h2:'720+360=1080.'},
+    {q:'84 × 12 = ?', a:1008, h1:'12 = 10+2.', h2:'840+168=1008.'}
+  ],
+  liniyka: [
+    {base:7, a:21, h1:'Довший відрізок у 3 рази більший.', h2:'7×3=21 см.'},
+    {base:9, a:27, h1:'Помнож довжину на 3.', h2:'9×3=27 см.'},
+    {base:12, a:36, h1:'У 3 рази — це ×3.', h2:'12×3=36 см.'},
+    {base:15, a:45, h1:'Помнож на 3.', h2:'15×3=45 см.'}
+  ],
+  bloknot: [
+    {seq:[7,14,21,28], a:35, h1:'Знайди сталий крок.', h2:'Щоразу додаємо 7.'},
+    {seq:[4,9,14,19], a:24, h1:'Знайди різницю сусідніх чисел.', h2:'Крок дорівнює 5.'},
+    {seq:[100,90,80,70], a:60, h1:'Числа зменшуються на однакову кількість.', h2:'Щоразу віднімаємо 10.'},
+    {seq:[2,6,18,54], a:162, h1:'Подумай, у скільки разів збільшується число.', h2:'Кожне число множимо на 3.'}
   ],
   korobka: [
     [
-      {q:'36 × 14 = ?', a:504},
-      {q:'20% від 150 = ?', a:30},
-      {q:'Периметр прямокутника зі сторонами 6 см і 9 см = ?', a:30}
+      {q:'27 × 14 = ?', a:378},
+      {q:'20% від 90 = ?', a:18},
+      {q:'3/5 від 40 = ?', a:24}
     ],
     [
-      {q:'48 × 12 = ?', a:576},
+      {q:'36 × 12 = ?', a:432},
       {q:'25% від 80 = ?', a:20},
-      {q:'Трикутник має кути 45° і 65°. Третій кут = ?', a:70}
+      {q:'5/6 від 48 = ?', a:40}
     ],
     [
-      {q:'27 × 16 = ?', a:432},
-      {q:'10% від 360 = ?', a:36},
-      {q:'Периметр прямокутника 28 см, одна сторона 5 см. Інша = ?', a:9}
+      {q:'45 × 13 = ?', a:585},
+      {q:'30% від 150 = ?', a:45},
+      {q:'7/10 від 70 = ?', a:49}
     ]
   ],
   seif: [
-    {clue:'Яке число підходить усім умовам? Парне. Більше 30 і менше 50. Ділиться на 6. Сума цифр дорівнює 6.', a:42, h1:'Перевір числа, кратні 6, у цьому проміжку.', h2:'42 парне, 30 < 42 < 50, 42 ділиться на 6, а 4 + 2 = 6.'},
-    {clue:'Яке число підходить усім умовам? Парне. Більше 40 і менше 60. Ділиться на 6. Сума цифр дорівнює 6.', a:42, h1:'Знайди парні числа в проміжку, кратні 6.', h2:'42 парне, 40 < 42 < 60, 42 ділиться на 6, а 4 + 2 = 6.'}
+    {clue:'Число парне. Більше 20 і менше 40. Ділиться на 6. Сума цифр дорівнює 6.', a:24},
+    {clue:'Число парне. Більше 40 і менше 60. Ділиться на 8. Сума цифр дорівнює 12.', a:48},
+    {clue:'Число парне. Більше 60 і менше 80. Ділиться на 9. Сума цифр дорівнює 18.', a:72}
   ],
-
-  // SECRET ROOM — 4 final investigations
   skrynya: [
-    {q:'25% від 160 = ?', a:40, h1:'25% — це чверть.', h2:'160 ÷ 4 = 40.'},
-    {q:'15% від 200 = ?', a:30, h1:'Знайди 10% і 5%.', h2:'20 + 10 = 30.'},
-    {q:'30% від 120 = ?', a:36, h1:'Знайди 10% і помнож на 3.', h2:'12 × 3 = 36.'}
+    {pct:25, of:64, a:16, h1:'25% — це чверть.', h2:'64÷4=16.'},
+    {pct:20, of:150, a:30, h1:'Знайди 10% і подвоюй.', h2:'15×2=30.'},
+    {pct:30, of:90, a:27, h1:'Знайди 10% і помнож на 3.', h2:'9×3=27.'},
+    {pct:15, of:200, a:30, h1:'10% + 5%.', h2:'20+10=30.'}
   ],
-  zapiska_math: [
-    {q:'Порівняй: 3/4 і 70%. Що більше?', type:'mcq', options:['3/4','70%','Вони рівні','Неможливо визначити'], a:'3/4', h1:'Перетвори дріб у відсотки.', h2:'3/4 = 75%, тому 3/4 більше.'},
-    {q:'Порівняй: 2/5 і 45%. Що більше?', type:'mcq', options:['2/5','45%','Вони рівні','Неможливо визначити'], a:'45%', h1:'Перетвори 2/5 у відсотки.', h2:'2/5 = 40%, тому 45% більше.'}
+  secret_map: [
+    {q:'На карті 5 точок. Відстань між сусідніми точками 6 см. Яка довжина шляху між першою і п’ятою точкою?', a:24, h1:'Між 5 точками є не 5, а 4 відрізки.', h2:'4×6=24 см.'},
+    {q:'На карті масштаб: 1 см — 4 км. Відстань на карті 7 см. Яка реальна відстань?', a:28, h1:'Помнож 7 на 4.', h2:'7×4=28 км.'},
+    {q:'Шлях має 3 ділянки: 8 км, 5 км і 7 км. Скільки кілометрів загалом?', a:20, h1:'Додай три довжини.', h2:'8+5+7=20 км.'}
   ],
-  polytsya_math: [
-    {q:'У прямокутника довжина 12 см, ширина 5 см. На скільки сантиметрів довжина більша за ширину?', a:7, h1:'Від більшої довжини відніми ширину.', h2:'12 − 5 = 7 см.'},
-    {q:'Сторони трикутника 5 см, 7 см і 9 см. Знайди периметр.', a:21, h1:'Додай усі три сторони.', h2:'5 + 7 + 9 = 21 см.'}
+  secret_lamp: [
+    {q:'Світло горіло 45 хв, потім вимкнулось на 20 хв і знову горіло 35 хв. Скільки хвилин воно горіло загалом?', a:80, h1:'Враховуй лише час, коли світло горіло.', h2:'45+35=80 хв.'},
+    {q:'Лампа коштувала 600 грн. Знижка 15%. Яка ціна зі знижкою?', a:510, h1:'Знайди 10% і 5%.', h2:'60+30=90; 600−90=510.'},
+    {q:'На столі 4 лампи. У кожній по 3 лампочки. Скільки лампочок?', a:12, h1:'Помнож 4 на 3.', h2:'4×3=12.'}
   ],
-  stil2_math: [
-    {q:'Було 500 грн. Спочатку витратили 10%, а потім ще 50 грн. Скільки залишилося?', a:400, h1:'Знайди 10% від 500, відніми його, потім ще 50.', h2:'500 − 50 − 50 = 400 грн.'},
-    {q:'Було 300 балів. Додали 20%, а потім витратили 30 балів. Скільки стало?', a:330, h1:'20% від 300 = 60.', h2:'300 + 60 − 30 = 330.'}
+  secret_shelf: [
+    {q:'У 3 коробках по 24 картки. 18 карток використали. Скільки залишилось?', a:54, h1:'Спочатку знайди всі картки.', h2:'3×24=72; 72−18=54.'},
+    {q:'Було 120 сторінок. Прочитано 35%. Скільки сторінок залишилось?', a:78, h1:'Спочатку знайди 35% від 120.', h2:'35%=42; 120−42=78.'},
+    {q:'5 книжок по 18 сторінок у кожній. Скільки сторінок?', a:90, h1:'Однакова кількість у кожній книжці.', h2:'5×18=90.'}
   ]
 };
 
@@ -758,70 +708,55 @@ const HELPER_LINES = [
    --------------------------------------------------------------------- */
 const SCENES = {
   classroom: {
-    id:'classroom', title:'Клас', image:'assets/classroom.png',
-    intro:'Ти знаходишся у класі. Спільношколярика тут немає, але він залишив кілька математичних слідів. Досліди всі важливі предмети.',
+    id:'classroom', title:'Клас',
+    intro:'Ти знаходишся у класі. Спільношколярика тут немає. Оглянь предмети уважно — кожен може приховувати математичний слід.',
     exitLabel:'ВИЙТИ В КОРИДОР',
-    exitRequires:['parta','shafa','rostlina','godynnyk','ryukzak','vikno'],
-    exitHint:'У класі ще залишилися нерозгадані сліди. Перевір предмети, які можуть містити підказки.',
+    exitRequires:['parta','shafa','rostlina','godynnyk','ryukzak'],
     objects:[
-      {id:'parta', icon:'📝', label:'Парта', kind:'puzzle', pool:'parta', storyIn:'На парті лежить відкритий зошит. На сторінці — обчислення.', storyOut:'У зошиті була захована картка з літерою.', giveLetter:'П'},
-      {id:'shafa', icon:'📚', label:'Книжкова шафа', kind:'puzzle', pool:'shafa', storyIn:'Між книжками захована задача на дроби.', storyOut:'За книжкою лежить картка з літерою.', giveLetter:'А'},
-      {id:'rostlina', icon:'🪴', label:'Рослина', kind:'puzzle', pool:'rostlina', storyIn:'На маленькій записці біля рослини записана числова послідовність. Здається, це один зі слідів Спільношколярика.', storyOut:'Ти розгадав закономірність.'},
-      {id:'godynnyk', icon:'🕐', label:'Годинник', kind:'puzzle', pool:'godynnyk', storyIn:'Годинник зупинився на дивному часі. Можливо, це не випадково.', storyOut:'Тепер час показує правильну відповідь.'},
-      {id:'ryukzak', icon:'🎒', label:'Рюкзак', kind:'puzzle', pool:'ryukzak', storyIn:'Це рюкзак Спільношколярика. Усередині — задача про частину від числа.', storyOut:'У кишені записка: «Шукай далі там, де всі проходять, але ніхто не затримується.»', note:'Шукай далі там, де всі проходять, але ніхто не затримується.'},
-      {id:'vikno', icon:'🪟', label:'Вікно', kind:'puzzle', pool:'vikno', storyIn:'На склі видно короткий числовий запис. Це схоже на математичний код.', storyOut:'Код розшифровано.'},
-      {id:'smitnyk', icon:'🗑️', label:'Смітник', kind:'joke', text:'Тут лежить контрольна робота з математики 1998 року. 😨 Ти вирішив її не чіпати.'},
-      {id:'doshka', icon:'🖊️', label:'Дошка', kind:'exit_hint', text:'«Наступний слід там, де всі проходять, але ніхто не затримується.»', lockedText:'Схоже, вихід ще заблоковано. Досліди всі математичні сліди у класі.'}
+      {id:'parta', label:'Парта із зошитом', kind:'puzzle', pool:'parta', storyIn:'На парті лежить відкритий зошит. На полях — обчислення.', storyOut:'Під зошитом ти знаходиш першу картку.', giveLetter:'П'},
+      {id:'shafa', label:'Книжкова шафа', kind:'puzzle', pool:'shafa', storyIn:'Між книжками видно позначку з двома дробами.', storyOut:'За книжкою захована друга картка.', giveLetter:'А'},
+      {id:'rostlina', label:'Рослина з підказкою', kind:'puzzle', pool:'rostlina', storyIn:'На горщику видно послідовність. Знайди число, якого бракує.', storyOut:'Ти розгадав закономірність.'},
+      {id:'godynnyk', label:'Годинник', kind:'puzzle', pool:'godynnyk', storyIn:'Годинник зупинився. На ньому залишився часовий слід.', storyOut:'Ти визначив тривалість підказки.'},
+      {id:'ryukzak', label:'Рюкзак', kind:'puzzle', pool:'ryukzak', storyIn:'У рюкзаку знайдено записку з частиною числа.', storyOut:'У кишені записка: «Шукай далі там, де всі проходять, але ніхто не затримується.»', note:'Шукай далі там, де всі проходять, але ніхто не затримується.'}
     ]
   },
-
   corridor: {
-    id:'corridor', title:'Коридор', image:'assets/corridor.png',
-    intro:'Ти виходиш у коридор. Тут тихо. Схоже, Спільношколярик залишив сліди просто на очах.',
+    id:'corridor', title:'Коридор',
+    intro:'Ти виходиш у коридор. Тут залишилися нові сліди. Досліджуй предмети, але не поспішай.',
     exitLabel:'ДО КАБІНЕТУ',
-    exitRequires:['dzvinok','kartyna','plakat','lavka','vognegasnyk','vishak'],
-    exitHint:'У коридорі ще є нерозгадані математичні підказки.',
+    exitRequires:['dzvinok','kartyna','doshka_corridor','lavka','vishak_corridor'],
     objects:[
-      {id:'dzvinok', icon:'🔔', label:'Дзвінок', kind:'puzzle', pool:'dzvinok', storyIn:'Поруч із дзвінком написаний короткий приклад.', storyOut:'Дзвінок дзенькнув — схоже, код правильний.'},
-      {id:'kartyna', icon:'🖼️', label:'Картина', kind:'puzzle', pool:'kartyna', storyIn:'На картині захована геометрична задача.', storyOut:'За картиною лежить картка з літерою.', giveLetter:'Р'},
-      {id:'plakat', icon:'📋', label:'Плакат', kind:'puzzle', pool:'plakat', storyIn:'На плакаті дивний математичний тест.', storyOut:'Ти помітив нову позначку на маршруті.'},
-      {id:'lavka', icon:'🛋️', label:'Лавка', kind:'puzzle', pool:'lavka', storyIn:'На лавці хтось залишив кілька цінників із відсотками.', storyOut:'Тепер зрозуміло, який відсоток захований у записці.'},
-      {id:'vognegasnyk', icon:'🧯', label:'Вогнегасник', kind:'puzzle', pool:'vognegasnyk', storyIn:'На етикетці вогнегасника написано дві величини. Треба визначити, яка більша.', storyOut:'Числа збігаються з кодом на наступних дверях.'},
-      {id:'vishak', icon:'🧥', label:'Вішак', kind:'puzzle', pool:'vishak', storyIn:'У кишені худі — задача про зміну ціни.', storyOut:'Записка показує: «Кабінет чекає.»'},
-      {id:'doshka_ogoloshen', icon:'📌', label:'Дошка оголошень', kind:'note', text:'«Наступна підказка там, де рахують.» Хм... схоже, це кабінет.'},
-      {id:'plakat_fact', icon:'📖', label:'Шкільна новина', kind:'poster', title:'МАТЕМАТИКА НАВКОЛО НАС'},
+      {id:'dzvinok', label:'Шкільний дзвінок', kind:'puzzle', pool:'dzvinok', storyIn:'Біля дзвінка хтось залишив вираз.', storyOut:'Вираз розгадано.'},
+      {id:'kartyna', label:'Картина', kind:'puzzle', pool:'kartyna', storyIn:'На картині є геометричний слід.', storyOut:'За картиною лежить третя картка.', giveLetter:'Р'},
+      {id:'doshka_corridor', label:'Дошка оголошень', kind:'puzzle', pool:'doshka_corridor', storyIn:'На дошці прикріплено математичну задачу.', storyOut:'Серед оголошень ти знаходиш напрямок далі.'},
+      {id:'lavka', label:'Лавка', kind:'puzzle', pool:'lavka', storyIn:'На лавці лежить коротка записка із задачею.', storyOut:'Ти знаходиш ще один фрагмент маршруту.'},
+      {id:'vishak_corridor', label:'Вішак із худі', kind:'puzzle', pool:'lavka', storyIn:'У кишені худі — задача. Схоже, Спільношколярик хотів перевірити твою уважність.', storyOut:'У кишені є записка: «Тепер шукай там, де рахують.»'}
     ]
   },
-
   office: {
-    id:'office', title:'Кабінет', image:'assets/office.png',
-    intro:'Тут підказок ще більше. Схоже, Спільношколярик спеціально залишив кілька задач складнішими.',
+    id:'office', title:'Кабінет',
+    intro:'Тут слідів ще більше. Щоб дістатися таємної кімнати, потрібно розв’язати всі основні задачі кабінету.',
     exitLabel:'ПЕРЕЙТИ ДО ТАЄМНОЇ КІМНАТИ',
-    exitRequires:['kalkulyator','liniyka','bloknot','computer','korobka'],
-    exitHint:'Перед таємною кімнатою треба розгадати основні задачі кабінету й відкрити коробку.',
+    exitRequires:['kalkulyator','liniyka','bloknot','computer','korobka','seif'],
     objects:[
-      {id:'kalkulyator', icon:'🖩', label:'Калькулятор', kind:'puzzle', pool:'kalkulyator', storyIn:'Калькулятор увімкнувся сам. На екрані — приклад у кілька дій.', storyOut:'На екрані зʼявилося слово: «Далі».'},
-      {id:'liniyka', icon:'📏', label:'Лінійка', kind:'puzzle', pool:'liniyka', storyIn:'На лінійці позначено відрізок. Потрібно знайти його частину.', storyOut:'На лінійці зʼявився маленький символ.'},
-      {id:'bloknot', icon:'📓', label:'Блокнот', kind:'sequence_puzzle', pool:'bloknot', storyIn:'У блокноті — числова закономірність.', storyOut:'На наступній сторінці зʼявився шматочок карти.'},
-      {id:'computer', icon:'💻', label:'Компʼютер', kind:'percent_puzzle', pool:'computer', storyIn:'На екрані: «Введіть пароль. Пароль — відповідь на задачу про відсотки.»', storyOut:'Компʼютер відкрився. На екрані: «Карта зберігається у коробці.»'},
-      {id:'korobka', icon:'📦', label:'Коробка', kind:'triple_puzzle', pool:'korobka', storyIn:'На коробці три замки. Відкриє її той, хто розвʼяже три задачі поспіль.', storyOut:'Коробка відкрилася. Всередині — фрагмент карти й картка з літерою.', giveLetter:'Т'},
-      {id:'karta', icon:'🗺️', label:'Карта', kind:'map'},
-      {id:'seif', icon:'🔐', label:'Сейф', kind:'safe_puzzle', pool:'seif', storyIn:'На сейфі — логічна числова загадка. Це додаткове розслідування.', storyOut:'Сейф відкрився. Усередині фото: «Він точно був тут.»'}
+      {id:'kalkulyator', label:'Калькулятор', kind:'puzzle', pool:'kalkulyator', storyIn:'Калькулятор увімкнувся сам і показав довгий приклад.', storyOut:'Калькулятор видав символ карти.'},
+      {id:'liniyka', label:'Лінійка', kind:'ruler_puzzle', pool:'liniyka', storyIn:'На лінійці позначено два відрізки.', storyOut:'На лінійці з’явився маленький символ.'},
+      {id:'bloknot', label:'Блокнот', kind:'sequence_puzzle', pool:'bloknot', storyIn:'У блокноті записана закономірність.', storyOut:'На наступній сторінці з’явився шматочок карти.'},
+      {id:'computer', label:'Комп’ютер', kind:'percent_puzzle', pool:'computer', storyIn:'На екрані: «Введіть пароль. Пароль — це відповідь на загадку.»', storyOut:'Комп’ютер відкрився. На екрані: «Карта зберігається у коробці.»'},
+      {id:'korobka', label:'Дерев’яна коробка', kind:'triple_puzzle', pool:'korobka', storyIn:'На коробці напис: «Відкриє той, хто розв’яже три задачі.»', storyOut:'Коробка відкрилася. Всередині — фрагмент карти і четверта картка.', giveLetter:'Т'},
+      {id:'seif', label:'Сейф', kind:'safe_puzzle', pool:'seif', storyIn:'На сейфі напис із кількома умовами. Відкрий його числом, яке підходить усім.', storyOut:'Сейф відкрився. Всередині — фото: «Він точно був тут.»'}
     ]
   },
-
   secretroom: {
-    id:'secretroom', title:'Таємна кімната', image:'assets/secret-room.png',
-    intro:'Ти майже розкрив таємницю. Тут залишилося кілька останніх задач і фінальна підказка.',
+    id:'secretroom', title:'Таємна кімната',
+    intro:'Ти майже розкрив таємницю. Тут залишилася остання серія математичних слідів.',
+    exitRequires:['skrynya','secret_map','secret_lamp','secret_shelf'],
     objects:[
-      {id:'zapiska', icon:'📜', label:'Записка', kind:'puzzle', pool:'zapiska_math', storyIn:'На записці: «Порівняй величини — і зрозумієш, куди дивитися далі.»', storyOut:'На звороті записки зʼявилася маленька стрілка.'},
-      {id:'skrynya', icon:'🗝️', label:'Велика скриня', kind:'percent_puzzle', pool:'skrynya', storyIn:'Скриня закрита. На замку — задача на відсотки.', storyOut:'У скрині лежала остання картка.', giveLetter:'А'},
-      {id:'polytsya', icon:'📖', label:'Книжкова полиця', kind:'puzzle', pool:'polytsya_math', storyIn:'Серед книжок захована задача на геометрію.', storyOut:'Між книжками — ще одна підказка.'},
-      {id:'stil2', icon:'🗒️', label:'Стіл', kind:'puzzle', pool:'stil2_math', storyIn:'На столі — фінальна задача у кілька дій.', storyOut:'Ти знайшов записку: «Збери все, що маєш.»'},
-      {id:'shafa2', icon:'🚪', label:'Шафа', kind:'search_or_flavor', flavorText:'Велика шафа. Старі підручники, коробки й пил.', wrongText:'Тут багато речей... Але Спільношколярика немає.'},
-      {id:'korobka2', icon:'📦', label:'Маленька коробка', kind:'search_or_flavor', flavorText:'Порожня. Тільки пил і одна скріпка.', wrongText:'Порожньо.'},
-      {id:'vikno2', icon:'🪟', label:'Вікно', kind:'search_or_flavor', flavorText:'За вікном нічне місто. Нікого не видно.', wrongText:'Нікого.'},
-      {id:'parta2', icon:'🔍', label:'Велика парта', kind:'final_desk', flavorText:'Велика парта в кутку кімнати. Під нею темно.'}
+      {id:'skrynya', label:'Велика скриня', kind:'percent_puzzle', pool:'skrynya', storyIn:'На замку скрині — відсоткова задача.', storyOut:'У скрині лежить остання картка.', giveLetter:'А'},
+      {id:'secret_map', label:'Карта на столі', kind:'puzzle', pool:'secret_map', storyIn:'На карті позначено маршрут із кількома ділянками.', storyOut:'На карті з’являється позначка біля парти.'},
+      {id:'secret_lamp', label:'Настільна лампа', kind:'puzzle', pool:'secret_lamp', storyIn:'Під лампою лежить маленький математичний запис.', storyOut:'Під лампою знаходиться підказка.'},
+      {id:'secret_shelf', label:'Книжкова полиця', kind:'puzzle', pool:'secret_shelf', storyIn:'Між книжками захована остання задача.', storyOut:'Ти знаходиш записку: «Тепер склади те, що зібрав.»'},
+      {id:'parta2', label:'Велика парта', kind:'final_desk', flavorText:'Велика парта в кутку кімнати. Під нею темно.'}
     ]
   }
 };
@@ -834,442 +769,79 @@ const FINAL_WORD = 'ПАРТА';
 /* ---------------------------------------------------------------------
    PROGRESS MILESTONES (order matters — used to compute % progress)
    --------------------------------------------------------------------- */
-const MILESTONES = [
-  'enter_classroom','letter_П','letter_А1','clue_ryukzak','exit_classroom',
-  'enter_corridor','letter_Р','exit_corridor',
-  'enter_office','solve_computer','letter_Т','exit_office',
-  'enter_secretroom','letter_А2','word_assembled','victory'
-];
+const MILESTONES = ['enter_classroom','letter_П','letter_А1','letter_Р','letter_Т','letter_А2','word_assembled','victory'];
 
 </script>
 <script>
 /* ==========================================================================
-   ТАЄМНИЦЯ ЗНИКЛОГО СПІЛЬНОШКОЛЯРИКА — scene art
-   Hand-built flat-vector SVG rooms with invisible/near-invisible hotspots
-   overlaid directly on the illustrated furniture. No card grids, no emoji-
-   as-scenery — objects are drawn as part of one continuous room.
-   Edit coordinates below to reposition furniture; each hotspot's data-obj
-   must match an object id in game_data.js SCENES for click handling to work.
+   PHOTO SCENES — supplied room images + ONE hotspot per real object
    ========================================================================== */
-
-const PALETTE = {
-  wall:'#F1E9DA', wallShade:'#E4D9C4', floor:'#DCCFB4', floorShade:'#CDBD9B',
-  baseboard:'#B7A785', wood:'#C99A63', woodDark:'#A97C45', woodLine:'#8C6636',
-  metal:'#AEB4B8', metalDark:'#888E92', paper:'#FDFBF3', paperShade:'#EFE9D6',
-  chalk:'#3E5C4E', chalkFrame:'#2E4238', chalkLine:'#F5F5F0',
-  glass:'#CFE7EC', glassShade:'#B6D6DC', frame:'#8C6636',
-  plantLeaf:'#7AAA52', plantLeaf2:'#8FBE63', pot:'#C1703F', potShade:'#A85B31',
-  fabricWhite:'#FCFAF3', fabricLine:'#575551',
-  orange:'#F88010', orangeDark:'#DE6E05', lime:'#98C932', limeDark:'#7CAA22', gray:'#575551',
+const SCENE_IMAGES = {
+  classroom:'assets/classroom.png',
+  corridor:'assets/corridor.png',
+  office:'assets/office.png',
+  secretroom:'assets/secret-room.png'
 };
-const P = PALETTE;
 
-/* ---------------------------------------------------------------------
-   Hotspot wrapper — invisible-ish hit area + optional "found" badge
-   --------------------------------------------------------------------- */
-function hotspot(id, label, x, y, w, h, inner, solved, pad){
-  pad = pad==null ? 20 : pad;
-  const hx = x-pad, hy = y-pad, hw = w+pad*2, hh = h+pad*2;
-  return `<g class="hotspot${solved?' is-solved':''}" data-obj="${id}" tabindex="0" role="button" aria-label="${label}">
-    ${inner}
-    <rect x="${hx}" y="${hy}" width="${hw}" height="${hh}" fill="#000" opacity="0" pointer-events="all"></rect>
-    <g class="hotspot-badge" transform="translate(${x+w-4},${y-2})">
-      <circle r="12" fill="${P.lime}"></circle>
-      <path d="M -5.5 0 L -1.5 4.5 L 5.5 -5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
-    </g>
-  </g>`;
-}
-
-function roomShell(scenePrefix, wallColor, floorColor, dim){
-  const vign = dim ? `<rect x="0" y="0" width="1000" height="640" fill="url(#${scenePrefix}-vign)"></rect>` : '';
-  return `
-  <defs>
-    <linearGradient id="${scenePrefix}-wallgrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="${wallColor}"></stop>
-      <stop offset="1" stop-color="${P.wallShade}"></stop>
-    </linearGradient>
-    <radialGradient id="${scenePrefix}-vign" cx="50%" cy="38%" r="75%">
-      <stop offset="0" stop-color="#000" stop-opacity="0"></stop>
-      <stop offset="1" stop-color="#2b2a27" stop-opacity="0.22"></stop>
-    </radialGradient>
-  </defs>
-  <rect x="0" y="0" width="1000" height="420" fill="url(#${scenePrefix}-wallgrad)"></rect>
-  <rect x="0" y="420" width="1000" height="220" fill="${floorColor}"></rect>
-  <rect x="0" y="420" width="1000" height="220" fill="${P.floorShade}" opacity="0.18"></rect>
-  <rect x="0" y="414" width="1000" height="10" fill="${P.baseboard}"></rect>
-  ${vign}`;
-}
-
-/* ---------------------------------------------------------------------
-   Reusable furniture primitives (all pure decoration unless wrapped
-   in hotspot() by the caller)
-   --------------------------------------------------------------------- */
-function chalkboardArt(x,y,w,h){
-  return `<g>
-    <rect x="${x-10}" y="${y-10}" width="${w+20}" height="${h+20}" rx="8" fill="${P.woodDark}"></rect>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="4" fill="${P.chalk}" stroke="${P.chalkFrame}" stroke-width="3"></rect>
-    <path d="M ${x+24} ${y+h-30} q 30 -18 60 -4 q 26 12 54 -6" stroke="${P.chalkLine}" stroke-width="2.5" fill="none" opacity="0.55" stroke-linecap="round"></path>
-    <circle cx="${x+w-28}" cy="${y+26}" r="9" fill="${P.orange}" opacity="0.85"></circle>
-    <text x="${x+w-28}" y="${y+30}" font-size="11" text-anchor="middle" fill="#fff" font-family="inherit" opacity="0.9">?</text>
-  </g>`;
-}
-function clockArt(cx,cy,r){
-  return `<g>
-    <circle cx="${cx}" cy="${cy}" r="${r+6}" fill="${P.woodDark}"></circle>
-    <circle cx="${cx}" cy="${cy}" r="${r}" fill="#fff" stroke="${P.gray}" stroke-width="2"></circle>
-    ${[0,90,180,270].map(a=>{
-      const r1=r-7, r2=r-2, rad=a*Math.PI/180;
-      return `<line x1="${cx+r1*Math.sin(rad)}" y1="${cy-r1*Math.cos(rad)}" x2="${cx+r2*Math.sin(rad)}" y2="${cy-r2*Math.cos(rad)}" stroke="${P.gray}" stroke-width="2"></line>`;
-    }).join('')}
-    <line x1="${cx}" y1="${cy}" x2="${cx+r*0.45}" y2="${cy-r*0.1}" stroke="${P.gray}" stroke-width="3" stroke-linecap="round"></line>
-    <line x1="${cx}" y1="${cy}" x2="${cx-r*0.1}" y2="${cy-r*0.6}" stroke="${P.orange}" stroke-width="2.5" stroke-linecap="round"></line>
-    <circle cx="${cx}" cy="${cy}" r="3" fill="${P.gray}"></circle>
-  </g>`;
-}
-function windowArt(x,y,w,h){
-  return `<g>
-    <rect x="${x-8}" y="${y-8}" width="${w+16}" height="${h+16}" fill="${P.frame}" rx="4"></rect>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${P.glass}"></rect>
-    <rect x="${x}" y="${y}" width="${w/2-2}" height="${h/2-2}" fill="${P.glassShade}" opacity="0.5"></rect>
-    <rect x="${x+w/2+2}" y="${y+h/2+2}" width="${w/2-2}" height="${h/2-2}" fill="${P.glassShade}" opacity="0.5"></rect>
-    <line x1="${x+w/2}" y1="${y}" x2="${x+w/2}" y2="${y+h}" stroke="${P.frame}" stroke-width="6"></line>
-    <line x1="${x}" y1="${y+h/2}" x2="${x+w}" y2="${y+h/2}" stroke="${P.frame}" stroke-width="6"></line>
-    <rect x="${x-14}" y="${y+h}" width="${w+28}" height="10" fill="${P.woodDark}"></rect>
-  </g>`;
-}
-function bookshelfArt(x,y,w,h,jut){
-  const rows=4, rowH=h/rows;
-  const shelves=[];
-  for(let i=0;i<rows;i++){
-    const ry=y+i*rowH;
-    const cols=[P.orange,P.lime,P.gray,'#B7815A','#7C97AE',P.orangeDark];
-    let bx=x+6, row='';
-    let n=Math.floor((w-12)/22);
-    for(let c=0;c<n;c++){
-      const bw = 15+((c*7+i*3)%8);
-      const bh = rowH-14;
-      const col = cols[(c+i)%cols.length];
-      const stickOut = (jut && i===1 && c===2) ? 10 : 0;
-      row += `<rect x="${bx}" y="${ry+7}" width="${bw}" height="${bh}" fill="${col}" opacity="0.88" transform="${stickOut?`translate(${stickOut} -4) rotate(-4 ${bx} ${ry+7})`:''}"></rect>`;
-      bx += bw+3;
-      if(bx>x+w-10) break;
-    }
-    shelves.push(row);
-    shelves.push(`<rect x="${x}" y="${ry+rowH-4}" width="${w}" height="5" fill="${P.woodDark}"></rect>`);
+// Percent coordinates are relative to the complete 1536×1024 scene image.
+// They intentionally cover the real object only; decorative notes/text are
+// never separate buttons.
+const HOTSPOTS = {
+  classroom:{
+    parta:[55,62,34,26], shafa:[20,16,13,19], rostlina:[13,36,9,22],
+    godynnyk:[78,5,9,17], ryukzak:[30,57,12,27]
+  },
+  corridor:{
+    dzvinok:[77,2,10,17], kartyna:[1,4,13,39], doshka_corridor:[30,27,17,35],
+    lavka:[9,61,20,23], vishak_corridor:[88,0,12,100]
+  },
+  office:{
+    kalkulyator:[45,62,9,10], liniyka:[29,74,19,5], bloknot:[17,64,9,10],
+    computer:[28,50,15,21], korobka:[56,62,15,17], seif:[87,48,12,38]
+  },
+  secretroom:{
+    skrynya:[55,49,14,14], secret_map:[39,50,13,12], secret_lamp:[60,38,11,11],
+    secret_shelf:[0,0,23,72], parta2:[25,66,50,13]
   }
-  return `<g>
-    <rect x="${x-8}" y="${y-8}" width="${w+16}" height="${h+16}" fill="${P.woodDark}" rx="4"></rect>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${P.wood}"></rect>
-    ${shelves.join('')}
-  </g>`;
-}
-function plantArt(x,y,w,h){
-  const cx = x+w/2, potY = y+h-46;
-  return `<g>
-    <path d="M ${cx-6} ${potY} C ${cx-40} ${potY-40} ${cx-30} ${y+30} ${cx-2} ${y+16}" stroke="${P.plantLeaf}" stroke-width="10" fill="none" stroke-linecap="round"></path>
-    <path d="M ${cx+4} ${potY} C ${cx+34} ${potY-50} ${cx+20} ${y+16} ${cx-2} ${y}" stroke="${P.plantLeaf2}" stroke-width="10" fill="none" stroke-linecap="round"></path>
-    <path d="M ${cx} ${potY} C ${cx-10} ${potY-70} ${cx+6} ${y+8} ${cx+10} ${y-6}" stroke="${P.plantLeaf}" stroke-width="9" fill="none" stroke-linecap="round"></path>
-    <path d="M ${cx-2} ${potY-2} C ${cx+26} ${potY-30} ${cx+16} ${y+40} ${cx+2} ${y+50}" stroke="${P.plantLeaf2}" stroke-width="9" fill="none" stroke-linecap="round"></path>
-    <path d="M ${x+w*0.18} ${potY+2} L ${x+w*0.82} ${potY+2} L ${x+w*0.7} ${y+h} L ${x+w*0.3} ${y+h} Z" fill="${P.pot}"></path>
-    <rect x="${x+w*0.18}" y="${potY-4}" width="${w*0.64}" height="10" rx="3" fill="${P.potShade}"></rect>
-  </g>`;
-}
-function trashArt(x,y,w,h){
-  return `<g>
-    <path d="M ${x+6} ${y+14} L ${x+w-6} ${y+14} L ${x+w-14} ${y+h} L ${x+14} ${y+h} Z" fill="${P.metal}"></path>
-    <ellipse cx="${x+w/2}" cy="${y+14}" rx="${w/2-6}" ry="7" fill="${P.metalDark}"></ellipse>
-    <path d="M ${x+w*0.32} ${y+6} q 8 -18 20 -6 q 10 -14 20 2" fill="${P.paper}" stroke="${P.gray}" stroke-width="1.4"></path>
-  </g>`;
-}
-function backpackArt(x,y,w,h){
-  return `<g>
-    <rect x="${x}" y="${y+10}" width="${w}" height="${h-10}" rx="16" fill="${P.orange}"></rect>
-    <rect x="${x+w*0.18}" y="${y+h*0.42}" width="${w*0.64}" height="${h*0.4}" rx="10" fill="${P.limeDark}" opacity="0.9"></rect>
-    <path d="M ${x+w*0.22} ${y} q ${w*0.28} -22 ${w*0.56} 0" stroke="${P.gray}" stroke-width="7" fill="none" stroke-linecap="round"></path>
-    <path d="M ${x+w*0.55} ${y+h*0.5} l 14 10 l -4 16" fill="none" stroke="#fff" stroke-width="2" opacity="0.7"></path>
-    <rect x="${x+w*0.58}" y="${y+h*0.52}" width="14" height="18" fill="${P.paper}" transform="rotate(8 ${x+w*0.58} ${y+h*0.52})"></rect>
-  </g>`;
-}
-function deskArt(x,y,w,h,withPaper){
-  const legY=y+h-6;
-  return `<g>
-    <rect x="${x}" y="${y}" width="${w}" height="16" rx="3" fill="${P.wood}"></rect>
-    <rect x="${x}" y="${y+16}" width="${w}" height="6" fill="${P.woodDark}"></rect>
-    <rect x="${x+8}" y="${y+22}" width="10" height="${legY-(y+22)}" fill="${P.woodDark}"></rect>
-    <rect x="${x+w-18}" y="${y+22}" width="10" height="${legY-(y+22)}" fill="${P.woodDark}"></rect>
-    ${withPaper ? `<rect x="${x+w*0.28}" y="${y-10}" width="30" height="20" fill="${P.paper}" stroke="${P.gray}" stroke-width="1" transform="rotate(-6 ${x+w*0.28} ${y-10})"></rect>` : ''}
-  </g>`;
-}
-function chairArt(x,y){
-  return `<g opacity="0.92">
-    <rect x="${x}" y="${y}" width="34" height="8" fill="${P.woodDark}"></rect>
-    <rect x="${x+2}" y="${y-38}" width="8" height="38" fill="${P.woodDark}"></rect>
-    <rect x="${x+24}" y="${y-38}" width="8" height="38" fill="${P.woodDark}"></rect>
-    <rect x="${x-2}" y="${y-58}" width="38" height="8" rx="2" fill="${P.wood}"></rect>
-    <rect x="${x+4}" y="${y+8}" width="6" height="26" fill="${P.woodDark}"></rect>
-    <rect x="${x+26}" y="${y+8}" width="6" height="26" fill="${P.woodDark}"></rect>
-  </g>`;
-}
-function benchArt(x,y,w,h){
-  return `<g>
-    <rect x="${x}" y="${y}" width="${w}" height="14" rx="3" fill="${P.wood}"></rect>
-    <rect x="${x}" y="${y+22}" width="${w}" height="12" rx="3" fill="${P.wood}"></rect>
-    <rect x="${x+16}" y="${y+14}" width="8" height="${h-14}" fill="${P.metalDark}"></rect>
-    <rect x="${x+w-24}" y="${y+14}" width="8" height="${h-14}" fill="${P.metalDark}"></rect>
-    <rect x="${x+w*0.42}" y="${y-14}" width="26" height="16" fill="${P.paper}" stroke="${P.gray}" stroke-width="1" transform="rotate(-5 ${x+w*0.42} ${y-14})"></rect>
-  </g>`;
-}
-function coatrackArt(x,y,w,h){
-  const cx = x+w/2;
-  const hookY = y+22;
-  const hookX = cx-16;
-  const bodyTop = hookY+14;
-  const bodyBottom = y+h*0.58;
-  const halfTop = w*0.26, halfBottom = w*0.36;
-  return `<g>
-    <rect x="${cx-5}" y="${y}" width="10" height="${h}" fill="${P.metalDark}"></rect>
-    <ellipse cx="${cx}" cy="${y+h}" rx="${w/2}" ry="8" fill="${P.metalDark}"></ellipse>
-    <circle cx="${hookX}" cy="${hookY}" r="7" fill="${P.metal}"></circle>
-    <circle cx="${cx+18}" cy="${hookY+16}" r="6" fill="${P.metal}"></circle>
-    <path d="M ${hookX-halfTop} ${bodyTop}
-             Q ${hookX} ${bodyTop-16} ${hookX+halfTop} ${bodyTop}
-             L ${hookX+halfBottom} ${bodyBottom}
-             Q ${hookX} ${bodyBottom+16} ${hookX-halfBottom} ${bodyBottom}
-             Z" fill="${P.fabricWhite}" stroke="${P.fabricLine}" stroke-width="1.5"></path>
-    <circle cx="${hookX}" cy="${bodyTop+12}" r="11" fill="none" stroke="${P.gray}" stroke-width="2" opacity="0.45"></circle>
-    <path d="M ${hookX-8} ${bodyTop+8} q 8 10 16 0" stroke="${P.orange}" stroke-width="2.2" fill="none" stroke-linecap="round"></path>
-    <circle cx="${hookX}" cy="${bodyTop+34}" r="12" fill="none" stroke="${P.lime}" stroke-width="2.2" opacity="0.65"></circle>
-    <rect x="${hookX+halfBottom-4}" y="${bodyBottom-20}" width="10" height="14" fill="${P.paper}" transform="rotate(8 ${hookX+halfBottom-4} ${bodyBottom-20})"></rect>
-  </g>`;
-}
-function bellArt(cx,cy,r){
-  return `<g>
-    <rect x="${cx-4}" y="${cy-r-18}" width="8" height="16" fill="${P.metalDark}"></rect>
-    <path d="M ${cx-r} ${cy+r*0.3} Q ${cx-r} ${cy-r} ${cx} ${cy-r} Q ${cx+r} ${cy-r} ${cx+r} ${cy+r*0.3} Z" fill="${P.orange}"></path>
-    <ellipse cx="${cx}" cy="${cy+r*0.32}" rx="${r+4}" ry="7" fill="${P.orangeDark}"></ellipse>
-    <circle cx="${cx}" cy="${cy+r*0.7}" r="6" fill="${P.orangeDark}"></circle>
-  </g>`;
-}
-function paintingArt(x,y,w,h){
-  return `<g>
-    <rect x="${x-8}" y="${y-8}" width="${w+16}" height="${h+16}" fill="${P.woodDark}" rx="3"></rect>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${P.glass}"></rect>
-    <rect x="${x+w*0.15}" y="${y+h*0.5}" width="${w*0.3}" height="${w*0.3}" fill="${P.orange}" opacity="0.8"></rect>
-    <circle cx="${x+w*0.68}" cy="${y+h*0.35}" r="${w*0.14}" fill="${P.lime}" opacity="0.85"></circle>
-    <path d="M ${x+w*0.5} ${y+h*0.78} l ${w*0.18} -${w*0.22} l ${w*0.18} ${w*0.22} z" fill="${P.gray}" opacity="0.7"></path>
-  </g>`;
-}
-function noticeBoardArt(x,y,w,h){
-  return `<g>
-    <rect x="${x-6}" y="${y-6}" width="${w+12}" height="${h+12}" fill="${P.woodDark}" rx="4"></rect>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#D9C6A0"></rect>
-    <rect x="${x+14}" y="${y+16}" width="${w*0.4}" height="${h*0.34}" fill="${P.paper}" transform="rotate(-4 ${x+14} ${y+16})"></rect>
-    <rect x="${x+w*0.5}" y="${y+h*0.4}" width="${w*0.36}" height="${h*0.32}" fill="${P.paper}" transform="rotate(3 ${x+w*0.5} ${y+h*0.4})"></rect>
-    <circle cx="${x+18}" cy="${y+20}" r="3" fill="${P.orange}"></circle>
-    <circle cx="${x+w*0.54}" cy="${y+h*0.44}" r="3" fill="${P.lime}"></circle>
-  </g>`;
-}
-function extinguisherArt(x,y,w,h){
-  return `<g>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${w/2}" fill="#D2432E"></rect>
-    <rect x="${x+w*0.28}" y="${y-10}" width="${w*0.44}" height="12" fill="${P.metalDark}"></rect>
-    <rect x="${x+w*0.14}" y="${y+h*0.34}" width="${w*0.72}" height="${h*0.18}" fill="${P.paper}" opacity="0.9"></rect>
-    <path d="M ${x+w*0.5} ${y-10} l 16 -14" stroke="${P.metalDark}" stroke-width="4" stroke-linecap="round"></path>
-  </g>`;
-}
-function posterArt(x,y,w,h){
-  return `<g>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${P.paper}" stroke="${P.gray}" stroke-width="1.5"></rect>
-    <rect x="${x}" y="${y}" width="${w}" height="10" fill="${P.orange}"></rect>
-    <circle cx="${x+w*0.3}" cy="${y+h*0.45}" r="${w*0.14}" fill="${P.lime}" opacity="0.8"></circle>
-    <rect x="${x+w*0.52}" y="${y+h*0.3}" width="${w*0.32}" height="${w*0.32}" fill="${P.orange}" opacity="0.55"></rect>
-    <text x="${x+w/2}" y="${y+h-10}" font-size="10" text-anchor="middle" fill="${P.gray}" font-family="inherit" font-weight="700">МАТЕМАТИКА</text>
-  </g>`;
-}
-function doorArt(x,y,w,h){
-  return `<g opacity="0.9">
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#D8C7A6" stroke="${P.woodDark}" stroke-width="3"></rect>
-    <rect x="${x+w*0.12}" y="${y+h*0.08}" width="${w*0.76}" height="${h*0.36}" fill="none" stroke="${P.woodDark}" stroke-width="2"></rect>
-    <rect x="${x+w*0.12}" y="${y+h*0.5}" width="${w*0.76}" height="${h*0.4}" fill="none" stroke="${P.woodDark}" stroke-width="2"></rect>
-    <circle cx="${x+w*0.85}" cy="${y+h*0.55}" r="4" fill="${P.metalDark}"></circle>
-  </g>`;
-}
-function officeDeskArt(x,y,w,h){
-  return `<g>
-    <rect x="${x}" y="${y}" width="${w}" height="18" rx="3" fill="${P.wood}"></rect>
-    <rect x="${x}" y="${y+18}" width="${w}" height="8" fill="${P.woodDark}"></rect>
-    <rect x="${x+10}" y="${y+26}" width="14" height="${h-26}" fill="${P.woodDark}"></rect>
-    <rect x="${x+w-24}" y="${y+26}" width="14" height="${h-26}" fill="${P.woodDark}"></rect>
-  </g>`;
-}
-function computerArt(x,y,w,h){
-  const monW=w, monH=h*0.62, kbY=y+monH+14;
-  return `<g>
-    <rect x="${x}" y="${y}" width="${monW}" height="${monH}" rx="8" fill="${P.gray}"></rect>
-    <rect x="${x+8}" y="${y+8}" width="${monW-16}" height="${monH-24}" fill="#26343B"></rect>
-    <circle cx="${x+monW/2}" cy="${y+monH/2}" r="6" fill="${P.lime}"><animate attributeName="opacity" values="1;0.35;1" dur="1.8s" repeatCount="indefinite"></animate></circle>
-    <rect x="${x+monW*0.42}" y="${y+monH}" width="${monW*0.16}" height="10" fill="${P.gray}"></rect>
-    <rect x="${x-6}" y="${kbY}" width="${w+12}" height="18" rx="4" fill="#E7E1D3" stroke="${P.gray}" stroke-width="1.2"></rect>
-  </g>`;
-}
-function calculatorArt(x,y,w,h){
-  return `<g>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6" fill="${P.gray}"></rect>
-    <rect x="${x+6}" y="${y+6}" width="${w-12}" height="${h*0.28}" fill="#C9E8B0"></rect>
-    ${Array.from({length:6}).map((_,i)=>`<rect x="${x+6+(i%3)*((w-12)/3)}" y="${y+h*0.42+Math.floor(i/3)*((h*0.5)/2)}" width="${(w-12)/3-4}" height="${(h*0.5)/2-4}" rx="2" fill="${i%2?P.orange:'#EDE6D3'}"></rect>`).join('')}
-  </g>`;
-}
-function rulerArt(x,y,w,h){
-  const ticks=[]; const n=Math.floor(w/14);
-  for(let i=1;i<n;i++){ ticks.push(`<line x1="${x+i*14}" y1="${y}" x2="${x+i*14}" y2="${y+(i%5===0?h*0.7:h*0.4)}" stroke="${P.gray}" stroke-width="1.2"></line>`); }
-  return `<g>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="#EADFC0" stroke="${P.woodDark}" stroke-width="1.4"></rect>
-    ${ticks.join('')}
-  </g>`;
-}
-function notebookArt(x,y,w,h){
-  return `<g>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="4" fill="${P.paper}" stroke="${P.gray}" stroke-width="1.4"></rect>
-    ${Array.from({length:5}).map((_,i)=>`<circle cx="${x+10}" cy="${y+12+i*((h-24)/4)}" r="2.4" fill="${P.gray}" opacity="0.5"></circle>`).join('')}
-    <text x="${x+w*0.56}" y="${y+h*0.4}" font-size="11" fill="${P.gray}" font-family="inherit" text-anchor="middle" opacity="0.85">10 20 30</text>
-    <path d="M ${x+w*0.3} ${y+h*0.62} l 8 8 l 16 -16" stroke="${P.lime}" stroke-width="2" fill="none" opacity="0.8"></path>
-  </g>`;
-}
-function boxArt(x,y,w,h,question){
-  return `<g>
-    <rect x="${x}" y="${y+h*0.28}" width="${w}" height="${h*0.72}" fill="${P.wood}"></rect>
-    <path d="M ${x} ${y+h*0.28} L ${x+w/2} ${y} L ${x+w} ${y+h*0.28} L ${x+w/2} ${y+h*0.5} Z" fill="${P.woodDark}"></path>
-    <rect x="${x+w/2-6}" y="${y+h*0.28}" width="12" height="${h*0.72}" fill="#8C6636" opacity="0.7"></rect>
-    ${question ? `<text x="${x+w/2}" y="${y+h*0.75}" font-size="26" text-anchor="middle" fill="${P.orange}" font-family="inherit" font-weight="800">?</text>` : ''}
-  </g>`;
-}
-function mapArt(x,y,w,h){
-  return `<g>
-    <rect x="${x-6}" y="${y-6}" width="${w+12}" height="${h+12}" fill="${P.woodDark}" rx="4" opacity="0.9"></rect>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#EFE3C2"></rect>
-    <path d="M ${x+16} ${y+h-20} q ${w*0.18} -${h*0.5} ${w*0.4} -${h*0.3} q ${w*0.22} ${h*0.18} ${w*0.36} -${h*0.5}" stroke="${P.orange}" stroke-width="2.4" fill="none" stroke-dasharray="6 5" opacity="0.85"></path>
-    ${[0.18,0.5,0.76,0.92].map(f=>`<circle cx="${x+16+f*(w-32)}" cy="${y+h-20-Math.sin(f*3.1)*h*0.28}" r="5" fill="${P.gray}"></circle>`).join('')}
-  </g>`;
-}
-function safeArt(x,y,w,h){
-  return `<g>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="${P.metalDark}"></rect>
-    <rect x="${x+8}" y="${y+8}" width="${w-16}" height="${h-16}" rx="4" fill="${P.metal}"></rect>
-    <circle cx="${x+w/2}" cy="${y+h*0.42}" r="${Math.min(w,h)*0.22}" fill="${P.gray}"></circle>
-    <circle cx="${x+w/2}" cy="${y+h*0.42}" r="${Math.min(w,h)*0.06}" fill="${P.orange}"></circle>
-    <rect x="${x+w*0.3}" y="${y+h*0.72}" width="${w*0.4}" height="10" rx="3" fill="${P.gray}"></rect>
-  </g>`;
-}
-function chestArt(x,y,w,h){
-  return `<g>
-    <rect x="${x}" y="${y+h*0.42}" width="${w}" height="${h*0.58}" fill="${P.wood}"></rect>
-    <path d="M ${x} ${y+h*0.42} Q ${x+w/2} ${y-h*0.16} ${x+w} ${y+h*0.42} Z" fill="${P.woodDark}"></path>
-    <rect x="${x}" y="${y+h*0.4}" width="${w}" height="10" fill="#8C6636"></rect>
-    <rect x="${x+w/2-9}" y="${y+h*0.42}" width="18" height="20" rx="3" fill="${P.orange}"></rect>
-    <circle cx="${x+w/2}" cy="${y+h*0.5}" r="4" fill="${P.gray}"></circle>
-  </g>`;
-}
-function wardrobeArt(x,y,w,h){
-  return `<g>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${P.woodDark}"></rect>
-    <rect x="${x+4}" y="${y+4}" width="${w/2-6}" height="${h-8}" fill="${P.wood}"></rect>
-    <rect x="${x+w/2+2}" y="${y+4}" width="${w/2-6}" height="${h-8}" fill="${P.wood}"></rect>
-    <rect x="${x+w/2-3}" y="${y+8}" width="6" height="${h-16}" fill="#2b2018" opacity="0.6"></rect>
-    <circle cx="${x+w/2-14}" cy="${y+h/2}" r="3.4" fill="${P.metalDark}"></circle>
-    <circle cx="${x+w/2+14}" cy="${y+h/2}" r="3.4" fill="${P.metalDark}"></circle>
-  </g>`;
-}
-function tableArt(x,y,w,h){
-  return `<g>
-    <rect x="${x}" y="${y}" width="${w}" height="14" rx="3" fill="${P.wood}"></rect>
-    <rect x="${x+10}" y="${y+14}" width="8" height="${h-14}" fill="${P.woodDark}"></rect>
-    <rect x="${x+w-18}" y="${y+14}" width="8" height="${h-14}" fill="${P.woodDark}"></rect>
-    <rect x="${x+w*0.3}" y="${y-14}" width="26" height="18" fill="${P.paper}" stroke="${P.gray}" stroke-width="1" transform="rotate(-6 ${x+w*0.3} ${y-14})"></rect>
-    <line x1="${x+w*0.34}" y1="${y-9}" x2="${x+w*0.5}" y2="${y-9}" stroke="${P.gray}" stroke-width="1" opacity="0.5" transform="rotate(-6 ${x+w*0.34} ${y-9})"></line>
-  </g>`;
-}
-function noteFloorArt(x,y,w,h){
-  return `<g>
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${P.paper}" stroke="${P.gray}" stroke-width="1.2" transform="rotate(-4 ${x} ${y})"></rect>
-    <line x1="${x+6}" y1="${y+h*0.3}" x2="${x+w-6}" y2="${y+h*0.3}" stroke="${P.gray}" stroke-width="1" opacity="0.4" transform="rotate(-4 ${x} ${y})"></line>
-    <line x1="${x+6}" y1="${y+h*0.55}" x2="${x+w-10}" y2="${y+h*0.55}" stroke="${P.gray}" stroke-width="1" opacity="0.4" transform="rotate(-4 ${x} ${y})"></line>
-  </g>`;
-}
+};
 
-/* ---------------------------------------------------------------------
-   Scene builders — return a full <svg>...</svg> string
-   solvedSet: Set of already-solved object ids (adds a small found-badge)
-   --------------------------------------------------------------------- */
-function buildClassroomSVG(solvedSet){
-  const s = id=>solvedSet.has(id);
-  return `<svg class="scene-illustration" viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Клас">
-    ${roomShell('classroom', P.wall, P.floor, false)}
-    ${posterArtIfRoom()}
-    ${hotspot('doshka','Дошка', 40,55,270,165, chalkboardArt(40,55,270,165), s('doshka'))}
-    ${hotspot('godynnyk','Годинник', 378,63,64,64, clockArt(410,95,32), s('godynnyk'), 22)}
-    ${hotspot('vikno','Вікно', 730,45,220,170, windowArt(730,45,220,170), s('vikno'))}
-    ${hotspot('shafa','Книжкова шафа', 790,280,190,240, bookshelfArt(790,280,190,240,true), s('shafa'))}
-    ${hotspot('rostlina','Рослина', 55,390,115,230, plantArt(60,390,110,230), s('rostlina'))}
-    ${hotspot('ryukzak','Рюкзак', 210,470,95,120, backpackArt(210,470,95,120), s('ryukzak'))}
-    ${hotspot('parta','Парта', 350,470,220,150, deskArt(350,470,190,95,true)+chairArt(560,556), s('parta'))}
-    ${hotspot('smitnyk','Смітник', 630,505,90,105, trashArt(630,505,90,105), s('smitnyk'))}
-  </svg>`;
-}
-function posterArtIfRoom(){
-  return `<g opacity="0.9">${paintingArt(500,85,130,100)}</g>`;
-}
+function buildPhotoScene(locationId, solvedSet){
+  const scene=SCENES[locationId];
+  const spots=HOTSPOTS[locationId]||{};
+  const wrap=document.createElement('div');
+  wrap.className='photo-scene';
+  const img=document.createElement('img');
+  img.className='scene-photo'; img.src=SCENE_IMAGES[locationId];
+  img.alt=scene.title; img.draggable=false;
+  wrap.appendChild(img);
 
-function buildCorridorSVG(solvedSet){
-  const s = id=>solvedSet.has(id);
-  return `<svg class="scene-illustration" viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Коридор">
-    ${roomShell('corridor', P.wall, P.floor, false)}
-    ${doorArt(830,50,120,360)}
-    ${hotspot('dzvinok','Дзвінок', 130,70,70,70, bellArt(165,105,32), s('dzvinok'), 24)}
-    ${hotspot('kartyna','Картина', 320,55,170,125, paintingArt(320,55,170,125), s('kartyna'))}
-    ${hotspot('doshka_ogoloshen','Дошка оголошень', 560,60,170,130, noticeBoardArt(560,60,170,130), s('doshka_ogoloshen'))}
-    ${hotspot('vishak','Вішак', 90,270,110,330, coatrackArt(90,270,110,330), s('vishak'))}
-    ${hotspot('vognegasnyk','Вогнегасник', 282,300,50,130, extinguisherArt(282,300,50,130), s('vognegasnyk'), 28)}
-    ${hotspot('plakat','Плакат', 420,230,130,180, posterArt(420,230,130,180), s('plakat'))}
-    ${hotspot('lavka','Лавка', 650,460,230,90, benchArt(650,460,230,90), s('lavka'))}
-  </svg>`;
-}
+  // The sequence is visual information, NOT a button. It sits over the plant
+  // so the child sees the clue in the scene but only the plant hotspot reacts.
+  if(locationId==='classroom') {
+    const clue=document.createElement('div');
+    clue.className='scene-clue plant-clue';
+    clue.textContent='3 → 6 → 12 → 24 → ?';
+    clue.setAttribute('aria-hidden','true');
+    wrap.appendChild(clue);
+  }
 
-function buildOfficeSVG(solvedSet){
-  const s = id=>solvedSet.has(id);
-  return `<svg class="scene-illustration" viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Кабінет">
-    ${roomShell('office', P.wall, P.floor, false)}
-    ${officeDeskArt(80,380,700,60)}
-    ${hotspot('karta','Карта', 60,60,170,200, mapArt(60,60,170,200), s('karta'))}
-    ${hotspot('computer','Комп\u2019ютер', 373,190,170,200, computerArt(373,190,170,120), s('computer'))}
-    ${hotspot('kalkulyator','Калькулятор', 90,335,68,55, calculatorArt(90,335,68,55), s('kalkulyator'), 25)}
-    ${hotspot('liniyka','Лінійка', 615,348,140,26, rulerArt(615,348,140,26), s('liniyka'), 32)}
-    ${hotspot('bloknot','Блокнот', 223,330,90,75, notebookArt(223,330,90,75), s('bloknot'))}
-    ${hotspot('korobka','Коробка', 650,470,130,110, boxArt(650,470,130,110,true), s('korobka'))}
-    ${hotspot('seif','Сейф', 830,300,130,290, safeArt(830,300,130,290), s('seif'))}
-  </svg>`;
-}
-
-function buildSecretroomSVG(solvedSet){
-  const s = id=>solvedSet.has(id);
-  return `<svg class="scene-illustration" viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Таємна кімната">
-    ${roomShell('secretroom', '#E6DCC6', '#D2C3A3', true)}
-    ${hotspot('vikno2','Вікно', 430,60,180,160, windowArt(430,60,180,160), s('vikno2'))}
-    ${hotspot('shafa2','Шафа', 60,140,170,340, wardrobeArt(60,140,170,340), s('shafa2'))}
-    ${hotspot('polytsya','Книжкова полиця', 800,120,180,280, bookshelfArt(800,120,180,280,false), s('polytsya'))}
-    ${hotspot('stil2','Стіл', 580,330,150,90, tableArt(580,330,150,90), s('stil2'))}
-    ${hotspot('skrynya','Велика скриня', 290,470,160,110, chestArt(290,470,160,110), s('skrynya'))}
-    ${hotspot('korobka2','Коробка', 810,500,130,100, boxArt(810,500,130,100,false), s('korobka2'))}
-    ${hotspot('zapiska','Записка', 80,520,90,60, noteFloorArt(80,520,90,60), s('zapiska'))}
-    ${hotspot('parta2','Велика парта', 510,460,240,120, deskArt(510,460,240,120,false), s('parta2'))}
-  </svg>`;
-}
-
-function buildSceneSVG(locationId, solvedSet){
-  if(locationId==='classroom') return buildClassroomSVG(solvedSet);
-  if(locationId==='corridor') return buildCorridorSVG(solvedSet);
-  if(locationId==='office') return buildOfficeSVG(solvedSet);
-  if(locationId==='secretroom') return buildSecretroomSVG(solvedSet);
-  return '<svg viewBox="0 0 1000 640"></svg>';
+  scene.objects.forEach(obj=>{
+    const box=spots[obj.id]; if(!box) return;
+    const [left,top,width,height]=box;
+    const b=document.createElement('button');
+    const finalDeskLocked = obj.id==='parta2' && locationId==='secretroom' && state.secretRoomMode!=='search';
+    b.type='button'; b.className='photo-hotspot'+(solvedSet.has(obj.id)?' solved':'');
+    b.style.left=left+'%'; b.style.top=top+'%'; b.style.width=width+'%'; b.style.height=height+'%';
+    b.dataset.obj=obj.id; b.setAttribute('aria-label',obj.label);
+    b.title='';
+    if(finalDeskLocked){ b.disabled=true; b.style.pointerEvents='none'; }
+    else b.addEventListener('click',()=>{ touchInteraction(); handleObjectClick(locationId,obj); });
+    if(solvedSet.has(obj.id)) {
+      const mark=document.createElement('span'); mark.className='solved-mark'; mark.textContent='✓'; mark.setAttribute('aria-hidden','true'); b.appendChild(mark);
+    }
+    wrap.appendChild(b);
+  });
+  return wrap;
 }
 
 </script>
@@ -1297,10 +869,6 @@ const STUDENT_ID = (function(){
 function getSaveKey(){
   return STUDENT_ID!=null ? ('spilnoshkola_quest_student_' + STUDENT_ID) : SAVE_KEY;
 }
-const TEACHER_MODE = (function(){
-  try{ return new URLSearchParams(window.location.search).get('teacher') === '1'; }catch(e){ return false; }
-})();
-const TEACHER_REPORTS_KEY = 'spilnoshkola_teacher_reports_v1';
 
 /* ---------------------------------------------------------------------
    Seeded random helpers — same seed => same puzzle variants & shuffles
@@ -1363,6 +931,9 @@ function freshState(){
     notes: [],
     mapFragments: 0,
     hintsUsedTotal: 0,
+    attemptsTotal: 0,
+    correctTotal: 0,
+    taskStats: {},
     milestones: [],
     metaTray: null,
     metaSlots: null,
@@ -1370,9 +941,6 @@ function freshState(){
     muted: false,
     isGameCompleted: false,
     finalDialogueIndex: 0,
-    startedAt: null,
-    completedAt: null,
-    stats: {attempts:0, correct:0, wrong:0, taskHistory:{}},
     lastInteraction: Date.now(),
   };
 }
@@ -1393,7 +961,7 @@ function loadState(){
   try{
     const raw = localStorage.getItem(getSaveKey());
     if(!raw) return null;
-    return ensureStats(JSON.parse(raw));
+    return JSON.parse(raw);
   }catch(e){ return null; }
 }
 function hasRealProgress(s){
@@ -1443,35 +1011,16 @@ function touchInteraction(){ state.lastInteraction = Date.now(); idleNudgeText =
 function addMilestone(key){
   if(!state.milestones.includes(key)) state.milestones.push(key);
 }
-function coreTaskObjects(){
-  const kinds = new Set(['puzzle','ruler_puzzle','sequence_puzzle','percent_puzzle','triple_puzzle']);
-  return Object.values(SCENES).flatMap(scene=>scene.objects.filter(o=>kinds.has(o.kind)));
-}
-function coreTaskCount(){ return coreTaskObjects().length; }
-function solvedCoreTaskCount(){ return coreTaskObjects().filter(o=>state.solvedObjects[o.id]).length; }
-function progressPercent(){
-  if(state.isGameCompleted) return 100;
-  return Math.round((solvedCoreTaskCount()/coreTaskCount())*100);
-}
-function ensureStats(s){
-  if(!s.stats) s.stats={attempts:0,correct:0,wrong:0,taskHistory:{}};
-  if(!s.stats.taskHistory) s.stats.taskHistory={};
-  if(typeof s.stats.attempts!=='number') s.stats.attempts=0;
-  if(typeof s.stats.correct!=='number') s.stats.correct=0;
-  if(typeof s.stats.wrong!=='number') s.stats.wrong=0;
-  return s;
-}
+function totalPuzzleCount(){ return Object.values(SCENES).reduce((n,sc)=>n+sc.objects.filter(o=>['puzzle','ruler_puzzle','sequence_puzzle','percent_puzzle','triple_puzzle','safe_puzzle'].includes(o.kind)).length,0); }
+function solvedPuzzleCount(){ return Object.keys(state.solvedObjects).filter(id=>{ const x=findObjectAnyScene(id); return x && ['puzzle','ruler_puzzle','sequence_puzzle','percent_puzzle','triple_puzzle','safe_puzzle'].includes(x.obj.kind); }).length; }
+function progressPercent(){ const core=totalPuzzleCount(); const solved=solvedPuzzleCount(); let pct=Math.round((solved/core)*90); if(state.milestones.includes('word_assembled')) pct=Math.max(pct,95); if(state.milestones.includes('victory')) pct=100; return Math.min(100,pct); }
 function letterOf(letterIdChar){ return letterIdChar; }
 
-function variantFor(objectId, poolName){
-  const pool = PUZZLE_POOLS[poolName];
-  const idx = hashStr(state.seed + '::' + objectId) % pool.length;
-  return pool[idx];
-}
+function variantFor(objectId,poolName){ const pool=PUZZLE_POOLS[poolName]; if(!pool||!pool.length) throw new Error('Відсутній пул задач: '+poolName); const idx=hashStr(state.seed+'::'+objectId)%pool.length; return pool[idx]; }
 function findObject(locationId, objectId){
   return SCENES[locationId].objects.find(o=>o.id===objectId);
 }
-function objectDone(id){ return !!state.solvedObjects[id]; }
+function objectDone(id){ return !!(state.solvedObjects[id] || state.visitedObjects[id]); }
 function findObjectAnyScene(objectId){
   for(const locId in SCENES){
     const o = SCENES[locId].objects.find(x=>x.id===objectId);
@@ -1481,89 +1030,15 @@ function findObjectAnyScene(objectId){
 }
 
 /* ---------------------------------------------------------------------
-   TEACHER REPORTS — no backend required. Students copy a compact report
-   from their device; the teacher pastes it into ?teacher=1.
-   For true live sync across devices, connect this layer to a backend later.
-   --------------------------------------------------------------------- */
-function reportEncode(obj){
-  try{ return btoa(unescape(encodeURIComponent(JSON.stringify(obj)))); }catch(e){ return ''; }
-}
-function reportDecode(code){
-  try{ return JSON.parse(decodeURIComponent(escape(atob(code.trim())))); }catch(e){ return null; }
-}
-function makeStudentReport(){
-  ensureStats(state);
-  const solved = solvedCoreTaskCount();
-  const total = coreTaskCount();
-  return {
-    version:3, studentId:STUDENT_ID, agentName:state.agentName || (STUDENT_ID ? `АГЕНТ №${STUDENT_ID}` : 'Без номера'),
-    seed:state.seed, progress:state.isGameCompleted?100:Math.round(solved/total*100), solved, total,
-    attempts:state.stats.attempts, correct:state.stats.correct, wrong:state.stats.wrong, hints:state.hintsUsedTotal||0,
-    location:state.currentLocation, completed:!!state.isGameCompleted,
-    startedAt:state.startedAt||null, completedAt:state.completedAt||null,
-    taskHistory:state.stats.taskHistory||{}
-  };
-}
-function getTeacherReports(){
-  try{ return JSON.parse(localStorage.getItem(TEACHER_REPORTS_KEY)||'[]'); }catch(e){ return []; }
-}
-function setTeacherReports(list){
-  try{ localStorage.setItem(TEACHER_REPORTS_KEY, JSON.stringify(list)); }catch(e){}
-}
-function renderTeacherDashboard(){
-  const reports=getTeacherReports().sort((a,b)=>(Number(a.studentId)||9999)-(Number(b.studentId)||9999));
-  const wrap=el('div',{class:'screen'});
-  const dash=el('div',{class:'dashboard'});
-  const panel=el('div',{class:'panel'});
-  const head=el('div',{class:'dashboard-head'});
-  head.appendChild(el('div',{},[textEl('div','eyebrow-dot','Спільношкола · кабінет учителя'),textEl('h1',null,'Прогрес математичного квесту')]));
-  const headActions=el('div',{});
-  headActions.appendChild(el('button',{class:'btn btn-secondary btn-sm',onclick:()=>{location.reload();},text:'Оновити'}));
-  head.appendChild(headActions); panel.appendChild(head);
-  panel.appendChild(textEl('p','tagline','Учні надсилають сюди свій звіт після гри. Немає рейтингів — лише прогрес, точність, спроби та підказки.'));
-  const stats=el('div',{class:'dashboard-grid'});
-  const avg=reports.length?Math.round(reports.reduce((s,r)=>s+(r.progress||0),0)/reports.length):0;
-  const done=reports.filter(r=>r.completed).length;
-  const totalSolved=reports.reduce((s,r)=>s+(r.solved||0),0);
-  [[reports.length,'Учнів у звіті'],[done,'Завершили'],[avg+'%','Середній прогрес'],[totalSolved,'Розвʼязано задач']].forEach(x=>{stats.appendChild(el('div',{class:'stat-card'},[textEl('div','value',String(x[0])),textEl('div',null,x[1])]));});
-  panel.appendChild(stats);
-  const importTitle=el('h3',null,'Додати звіт учня'); panel.appendChild(importTitle);
-  const ta=el('textarea',{class:'report-code',placeholder:'Встав сюди код звіту, який учень скопіював у грі...'}); panel.appendChild(ta);
-  const importRow=el('div',{class:'modal-actions'});
-  importRow.appendChild(el('button',{class:'btn',onclick:()=>{
-    const r=reportDecode(ta.value);
-    if(!r || r.version!==3){ alert('Не вдалося прочитати звіт. Скопіюй код ще раз повністю.'); return; }
-    const list=getTeacherReports().filter(x=>String(x.studentId)!==String(r.studentId)); list.push(r); setTeacherReports(list); ta.value=''; renderTeacherDashboard().scrollIntoView({block:'start'}); location.reload();
-  },text:'Додати звіт'}));
-  importRow.appendChild(el('button',{class:'btn btn-secondary btn-sm',onclick:()=>{setTeacherReports([]);location.reload();},text:'Очистити всі звіти'}));
-  panel.appendChild(importRow);
-  if(!reports.length){
-    panel.appendChild(textEl('p','tagline','Поки що звітів немає. Відкрий гру на пристрої учня, а після проходження натисни «Скопіювати звіт учителя».'));
-  }else{
-    const table=el('table',{class:'report-table'});
-    const thead=el('thead'); const trh=el('tr'); ['№','Агент','Прогрес','Задачі','Спроби','Правильно','Точність','Підказки','Стан'].forEach(h=>trh.appendChild(el('th',{text:h}))); thead.appendChild(trh); table.appendChild(thead);
-    const tbody=el('tbody');
-    reports.forEach(r=>{
-      const tr=el('tr');
-      [r.studentId??'—',r.agentName||'—',(r.progress||0)+'%',`${r.solved||0}/${r.total||total}`,r.attempts||0,r.correct||0,(r.attempts?Math.round((r.correct/r.attempts)*100):0)+'%',r.hints||0,r.completed?'Завершено':(r.location||'Не почато')].forEach(v=>tr.appendChild(el('td',{text:String(v)})));
-      tbody.appendChild(tr);
-    });
-    table.appendChild(tbody); panel.appendChild(table);
-  }
-  panel.appendChild(textEl('p','footer-note','Для відкриття цього кабінету: додай ?teacher=1 до адреси гри. Наприклад: .../index.html?teacher=1'));
-  dash.appendChild(panel); wrap.appendChild(dash); return wrap;
-}
-
-/* ---------------------------------------------------------------------
    Render root
    --------------------------------------------------------------------- */
 function render(){
   const root = document.getElementById('app');
-  if(TEACHER_MODE){ root.innerHTML=''; root.appendChild(renderTeacherDashboard()); return; }
   root.innerHTML = '';
   switch(state.screen){
     case 'MODE_SELECT': root.appendChild(renderModeSelect()); break;
     case 'TEACHER_INTRO': root.appendChild(renderTeacherIntro()); break;
+    case 'TEACHER_DASHBOARD': root.appendChild(renderTeacherDashboard()); break;
     case 'START': root.appendChild(renderStartScreen()); break;
     case 'AGENT_SETUP': root.appendChild(renderAgentSetup()); break;
     case 'SCENE': root.appendChild(renderSceneScreen()); break;
@@ -1610,6 +1085,7 @@ function renderModeSelect(){
   const grid = el('div',{class:'mode-select-grid'});
   grid.appendChild(el('button',{class:'btn', onclick:()=>{ touchInteraction(); state.screen='TEACHER_INTRO'; state.teacherStep=0; render(); }, text:'🖥️ Показати вступ на екрані (вчитель)'}));
   grid.appendChild(el('button',{class:'btn btn-secondary', onclick:()=>{ touchInteraction(); state.screen='START'; render(); }, text:'🕵️ Одразу почати гру (учень)'}));
+  grid.appendChild(el('button',{class:'btn btn-ghost', onclick:()=>{ location.href=location.pathname+'?teacher=1'; }, text:'📊 Кабінет учителя'}));
   panel.appendChild(grid);
   wrap.appendChild(panel);
   return wrap;
@@ -1705,7 +1181,6 @@ function renderAgentSetup(){
   panel.appendChild(el('button',{class:'btn', onclick:()=>{
       touchInteraction();
       state.currentLocation = 'classroom';
-      if(!state.startedAt) state.startedAt = Date.now();
       addMilestone('enter_classroom');
       state.screen='SCENE';
       render();
@@ -1719,101 +1194,31 @@ function renderAgentSetup(){
    Rendered as one illustrated room (scene_art.js) with hotspots directly
    on the furniture — no card grid, no emoji-as-scenery.
    --------------------------------------------------------------------- */
-function sceneHotspots(sceneId){
-  const maps = {
-    classroom:{
-      // Coordinates are percentages of the supplied 1536×1024 classroom illustration.
-      // Hotspots sit over the real objects, not over an artificial SVG scene.
-      parta:[66,66,22,18], shafa:[25,35,16,43], rostlina:[18,45,12,22], godynnyk:[84,13,10,14],
-      ryukzak:[36,72,12,22], vikno:[9,34,17,61], smitnyk:[90,61,10,20], doshka:[59,29,36,28]
-    },
-    corridor:{
-      dzvinok:[82,9,8,12], kartyna:[28,33,11,23], plakat:[36,48,16,30], lavka:[22,70,22,18],
-      vognegasnyk:[56,40,6,18], vishak:[18,63,13,25], doshka_ogoloshen:[36,47,17,30], plakat_fact:[72,44,12,24]
-    },
-    office:{
-      kalkulyator:[51,65,10,10], liniyka:[39,74,25,7], bloknot:[40,68,14,12], computer:[30,64,18,22],
-      korobka:[62,65,16,14], karta:[49,44,20,25], seif:[92,70,10,30]
-    },
-    secretroom:{
-      zapiska:[59,36,11,10], skrynya:[61,66,20,16], polytsya:[12,38,15,60], stil2:[49,62,40,28],
-      shafa2:[31,34,19,52], korobka2:[92,86,12,16], vikno2:[57,18,17,19], parta2:[49,63,42,29]
-    }
-  };
-  return maps[sceneId] || {};
-}
-function sceneVisualClues(sceneId){
-  // Small, story-like clues placed over the supplied room illustrations.
-  // They are intentionally subtle: no object labels, no cards, no emoji scenery.
-  const clues = {
-    classroom: [
-      {id:'plant-sequence-clue', x:18, y:48, w:12, h:8, text:'3 → 6 → 12 → 24 → ?', target:'rostlina', tone:'orange'}
-    ],
-    corridor: [
-      {id:'geometry-clue', x:28, y:36, w:12, h:8, text:'△  50°  60°  ?', target:'kartyna', tone:'lime'}
-    ],
-    office: [
-      {id:'box-clue', x:62, y:59, w:12, h:8, text:'3 замки', target:'korobka', tone:'orange'}
-    ],
-    secretroom: [
-      {id:'final-clue', x:49, y:48, w:14, h:8, text:'ЗБЕРИ ЛІТЕРИ', target:'stil2', tone:'lime'}
-    ]
-  };
-  return clues[sceneId] || [];
-}
-
-function renderVisualClues(scene){
-  // Visual clues are deliberately NON-INTERACTIVE. Each clue belongs to the
-  // physical object underneath it, so there is exactly one clickable target
-  // per object. The object hotspot is the only element that opens the puzzle.
-  const layer = el('div',{class:'scene-clues-layer','aria-hidden':'true'});
-  sceneVisualClues(scene.id).forEach(clue=>{
-    const note=el('div',{
-      class:'scene-clue '+(clue.tone==='lime'?'clue-lime':'clue-orange'),
-      style:`left:${clue.x}%;top:${clue.y}%;--w:${clue.w}%;--h:${clue.h}%;`,
-      'aria-hidden':'true'
-    });
-    note.appendChild(textEl('span','clue-paper-text',clue.text));
-    layer.appendChild(note);
-  });
-  return layer;
-}
-
-function renderImageScene(scene){
-  const wrap = el('div',{class:'scene-image-wrap'});
-  const img = el('img',{class:'scene-image', src:scene.image, alt:scene.title});
-  wrap.appendChild(img);
-  wrap.appendChild(renderVisualClues(scene));
-  const maps = sceneHotspots(scene.id);
-  scene.objects.forEach(obj=>{
-    const c = maps[obj.id];
-    if(!c) return;
-    const btn = el('button',{class:'scene-hotspot'+(state.solvedObjects[obj.id]?' is-solved':''),
-      style:`left:${c[0]}%;top:${c[1]}%;--w:${c[2]}%;--h:${c[3]}%;`,
-      'aria-label':obj.label,
-      title:obj.label,
-      onclick:()=>{ touchInteraction(); handleObjectClick(scene.id,obj); }
-    });
-    btn.appendChild(textEl('span','found-dot','✓'));
-    wrap.appendChild(btn);
-  });
-  return wrap;
-}
 function renderSceneScreen(){
   const scene = SCENES[state.currentLocation];
-  const wrap = el('div', {});
+  const wrap = el('div',{});
   wrap.appendChild(renderTopbar(scene.title));
   wrap.appendChild(renderProgressBar());
-  const stageWrap = el('div',{class:'stage-wrap'});
-  const stageBg = el('div',{class:'scene-bg'});
-  stageBg.appendChild(textEl('div','scene-intro-text', scene.intro));
-  const illustration = el('div',{class:'illustration-wrap'});
-  illustration.appendChild(renderImageScene(scene));
+  const stageWrap=el('div',{class:'stage-wrap'});
+  const stageBg=el('div',{class:'scene-bg'});
+  stageBg.appendChild(textEl('div','scene-intro-text',scene.intro));
+  const solvedSet=new Set(Object.keys(state.solvedObjects).filter(id=>state.solvedObjects[id]));
+  const illustration=buildPhotoScene(scene.id,solvedSet);
   stageBg.appendChild(illustration);
-  if(scene.id==='secretroom' && state.letters.length>=5 && state.secretRoomMode==='explore'){
+
+  if(scene.id!=='secretroom'){
+    const ready=scene.exitRequires.every(objectDone);
     const cta=el('div',{class:'exit-cta'});
-    cta.appendChild(el('button',{class:'btn btn-success',onclick:()=>{touchInteraction();setupMetaPuzzle();state.screen='META';render();},text:'🧩 СКЛАСТИ СЛОВО'}));
+    const btn=el('button',{class:'btn'+(ready?' btn-success':''),disabled:!ready,onclick:()=>{ if(ready) goToNextScene(scene.id); },text:ready?scene.exitLabel:`🔒 ${scene.exitLabel}`});
+    cta.appendChild(btn); stageBg.appendChild(cta);
+  } else if(scene.exitRequires.every(objectDone) && state.secretRoomMode==='explore'){
+    const cta=el('div',{class:'exit-cta'});
+    cta.appendChild(el('button',{class:'btn btn-success',onclick:()=>{setupMetaPuzzle();state.screen='META';render();},text:'🧩 СКЛАСТИ СЛОВО'}));
     stageBg.appendChild(cta);
+  }
+  if(scene.id==='secretroom' && state.secretRoomMode==='search'){
+    const hint=el('div',{class:'scene-intro-text',text:'Ти знаєш слово «ПАРТА». Шукай саме парту — під нею ховається Спільношколярик.'});
+    stageBg.appendChild(hint);
   }
   stageWrap.appendChild(stageBg); wrap.appendChild(stageWrap); wrap.appendChild(renderHelperBar(scene));
   return wrap;
@@ -1834,6 +1239,29 @@ function goToNextScene(fromId){
   render();
 }
 
+function makeTeacherReport(){
+  const solved=solvedPuzzleCount(), total=totalPuzzleCount();
+  return JSON.stringify({student:STUDENT_ID||null,agent:state.agentName||'—',solved,total,progress:progressPercent(),attempts:state.attemptsTotal||0,correct:state.correctTotal||0,hints:state.hintsUsedTotal||0,completed:!!state.isGameCompleted,updated:new Date().toISOString()});
+}
+function copyTeacherReport(){
+  const text=makeTeacherReport();
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(()=>{pendingModal={kind:'reportCopied'};render();}).catch(()=>{pendingModal={kind:'reportText',text};render();}); }
+  else { pendingModal={kind:'reportText',text}; render(); }
+}
+function renderTeacherDashboard(){
+  const wrap=el('div',{class:'screen'}), panel=el('div',{class:'panel'});
+  panel.appendChild(textEl('div','eyebrow-dot','Кабінет учителя'));
+  panel.appendChild(textEl('h1',null,'ПРОГРЕС АГЕНТІВ'));
+  panel.appendChild(textEl('p','tagline','На кожному пристрої учень може скопіювати однорядковий звіт. Вставляй звіти нижче — один рядок на учня.'));
+  const area=el('textarea',{style:'width:100%;min-height:180px;padding:12px;border:2px solid #e5e1d8;border-radius:12px;font:14px monospace;',placeholder:'Встав сюди звіти, по одному JSON-рядку на учня'});
+  const tableWrap=el('div',{style:'margin-top:16px;overflow:auto;'});
+  const renderTable=()=>{ tableWrap.innerHTML=''; const rows=area.value.split(/\n+/).map(x=>x.trim()).filter(Boolean).map(x=>{try{return JSON.parse(x)}catch(e){return null}}).filter(Boolean); if(!rows.length){tableWrap.appendChild(textEl('p','tagline','Тут з’явиться таблиця після вставлення звітів.'));return;} const table=document.createElement('table'); table.style.width='100%';table.style.borderCollapse='collapse'; const headers=['№','Агент','Прогрес','Задачі','Спроби','Правильно','Підказки','Стан']; const tr=document.createElement('tr'); headers.forEach(h=>{const th=document.createElement('th');th.textContent=h;th.style.padding='8px';th.style.borderBottom='2px solid #e5e1d8';tr.appendChild(th)});table.appendChild(tr);rows.forEach(r=>{const tr=document.createElement('tr'); const vals=[r.student??'—',r.agent||'—',(r.progress??0)+'%',`${r.solved??0}/${r.total??totalPuzzleCount()}`,r.attempts??0,r.correct??0,r.hints??0,r.completed?'Завершено':'У процесі'];vals.forEach(v=>{const td=document.createElement('td');td.textContent=String(v);td.style.padding='8px';td.style.borderBottom='1px solid #eee';tr.appendChild(td)});table.appendChild(tr)});tableWrap.appendChild(table); };
+  area.addEventListener('input',renderTable);
+  panel.appendChild(area); panel.appendChild(tableWrap);
+  panel.appendChild(el('button',{class:'btn btn-secondary',style:'margin-top:16px;',onclick:()=>{location.href=location.pathname;},text:'← Повернутися до гри'}));
+  wrap.appendChild(panel); return wrap;
+}
+
 function renderTopbar(title){
   const bar = el('div',{class:'topbar'});
   bar.appendChild(textEl('div','loc-title', title));
@@ -1848,7 +1276,7 @@ function renderTopbar(title){
 
 function renderProgressBar(){
   const wrap = el('div',{class:'progress-wrap'});
-  wrap.appendChild(textEl('div','progress-label', `Розслідування: ${progressPercent()}% · Завдання: ${solvedCoreTaskCount()}/${coreTaskCount()}`));
+  wrap.appendChild(textEl('div','progress-label', `Розслідування: ${progressPercent()}%`));
   const track = el('div',{class:'progress-track'});
   track.appendChild(el('div',{class:'progress-fill', style:`width:${progressPercent()}%`}));
   wrap.appendChild(track);
@@ -1872,80 +1300,23 @@ function renderHelperBar(scene){
 /* ---------------------------------------------------------------------
    Object click dispatch
    --------------------------------------------------------------------- */
-function handleObjectClick(locationId, obj){
+function handleObjectClick(locationId,obj){
   SFX.click();
-  state.visitedObjects[obj.id] = true;
-
-  if(state.solvedObjects[obj.id] && ['puzzle','ruler_puzzle','sequence_puzzle','percent_puzzle','triple_puzzle'].includes(obj.kind)){
-    pendingModal = { kind:'already', text:'Ти вже розгадав цю загадку. Можеш рухатися далі.', icon: obj.icon };
-    render(); return;
-  }
-
+  if(!SCENES[locationId] || !SCENES[locationId].objects.some(o=>o.id===obj.id)) return;
+  state.visitedObjects[obj.id]=true;
+  if(state.solvedObjects[obj.id]) return;
   switch(obj.kind){
-    case 'puzzle': openPuzzle(locationId, obj, 'input_or_mcq'); return;
-    case 'ruler_puzzle': openPuzzle(locationId, obj, 'ruler'); return;
-    case 'sequence_puzzle': openPuzzle(locationId, obj, 'sequence'); return;
-    case 'percent_puzzle': openPuzzle(locationId, obj, 'percent'); return;
-    case 'triple_puzzle': openPuzzle(locationId, obj, 'triple'); return;
-    case 'safe_puzzle': openPuzzle(locationId, obj, 'safe'); return;
-
-    case 'joke':
-      pendingModal = { kind:'joke', text: obj.text, icon: obj.icon };
+    case 'puzzle': openPuzzle(locationId,obj,'input_or_mcq'); return;
+    case 'ruler_puzzle': openPuzzle(locationId,obj,'ruler'); return;
+    case 'sequence_puzzle': openPuzzle(locationId,obj,'sequence'); return;
+    case 'percent_puzzle': openPuzzle(locationId,obj,'percent'); return;
+    case 'triple_puzzle': openPuzzle(locationId,obj,'triple'); return;
+    case 'safe_puzzle': openPuzzle(locationId,obj,'safe'); return;
+    case 'final_desk':
+      if(state.secretRoomMode==='search'){
+        SFX.reveal(); state.finalDialogueIndex=0; addMilestone('victory'); state.screen='FINAL_REVEAL';
+      } else { pendingModal={kind:'flavor',text:obj.flavorText||'',icon:'🔍'}; }
       render(); return;
-
-    case 'note':
-      if(obj.note && !state.notes.includes(obj.note)) state.notes.push(obj.note);
-      pendingModal = { kind:'note', text: obj.text, icon: obj.icon };
-      render(); return;
-
-    case 'flavor':
-      pendingModal = { kind:'flavor', text: obj.text, icon: obj.icon };
-      render(); return;
-
-    case 'poster':{
-      const fact = pickFrom(state.seed, obj.id, POSTER_FACTS);
-      pendingModal = { kind:'poster', title: obj.title, text: fact, icon: obj.icon };
-      render(); return;
-    }
-
-    case 'exit_hint':{
-      const scene = SCENES[locationId];
-      const ready = scene.exitRequires.every(objectDone);
-      pendingModal = ready
-        ? { kind:'exitReady', text: obj.text, exitLabel: scene.exitLabel, locationId: locationId, icon: obj.icon }
-        : { kind:'lockedExit', text: obj.lockedText, icon: obj.icon };
-      render(); return;
-    }
-
-    case 'map':{
-      const scene = SCENES[locationId];
-      const ready = scene.exitRequires.every(objectDone);
-      pendingModal = ready
-        ? { kind:'map' }
-        : { kind:'lockedExit', text: scene.exitHint, icon: obj.icon };
-      render(); return;
-    }
-
-    case 'search_or_flavor':{
-      if(state.secretRoomMode === 'search'){
-        pendingModal = { kind:'wrong', text: obj.wrongText, icon: obj.icon };
-      } else {
-        pendingModal = { kind:'flavor', text: obj.flavorText, icon: obj.icon };
-      }
-      render(); return;
-    }
-
-    case 'final_desk':{
-      if(state.secretRoomMode === 'search'){
-        SFX.reveal();
-        state.finalDialogueIndex = 0;
-        addMilestone('victory');
-        state.screen = 'FINAL_REVEAL';
-      } else {
-        pendingModal = { kind:'flavor', text: obj.flavorText, icon: obj.icon };
-      }
-      render(); return;
-    }
   }
 }
 
@@ -1953,11 +1324,6 @@ function handleObjectClick(locationId, obj){
    Simple modals (joke / note / flavor / poster / locked exit / map / menu)
    --------------------------------------------------------------------- */
 function closeModal(){ pendingModal = null; render(); }
-async function copyTeacherReport(){
-  const code=reportEncode(makeStudentReport());
-  try{ await navigator.clipboard.writeText(code); pendingModal={kind:'reportCopied'}; render(); }
-  catch(e){ pendingModal={kind:'reportCopyFallback', code}; render(); }
-}
 
 function renderModalHost(){
   const m = pendingModal;
@@ -1966,22 +1332,15 @@ function renderModalHost(){
   card.appendChild(el('button',{class:'close-x', 'aria-label':'Закрити', onclick:closeModal, text:'✕'}));
   if(m.icon){ card.appendChild(textEl('div','modal-icon', m.icon)); }
 
-  if(m.kind==='menu'){
+  if(m.kind==='reportCopied'){ card.appendChild(textEl('h2',null,'Звіт скопійовано')); card.appendChild(textEl('p',null,'Встав його у кабінет учителя.')); card.appendChild(el('button',{class:'btn',onclick:closeModal,text:'Гаразд'}));
+  } else if(m.kind==='reportText'){ card.appendChild(textEl('h2',null,'Звіт для вчителя')); const ta=el('textarea',{style:'width:100%;min-height:120px;padding:10px;border:2px solid #e5e1d8;border-radius:10px;font:12px monospace;',text:m.text}); ta.value=m.text; card.appendChild(ta); card.appendChild(el('button',{class:'btn',onclick:closeModal,text:'Закрити'}));
+  } else if(m.kind==='menu'){
     card.appendChild(textEl('h2',null,'Меню'));
     const grid = el('div',{class:'mode-select-grid'});
     grid.appendChild(el('button',{class:'btn btn-secondary', onclick:()=>{ pendingModal={kind:'resetConfirm'}; render(); }, text:'🔄 Почати гру заново'}));
-    grid.appendChild(el('button',{class:'btn btn-success', onclick:()=>{ copyTeacherReport(); }, text:'📋 Скопіювати звіт учителя'}));
+    grid.appendChild(el('button',{class:'btn btn-ghost', onclick:copyTeacherReport, text:'📋 Скопіювати звіт учителя'}));
     grid.appendChild(el('button',{class:'btn btn-ghost', onclick: closeModal, text:'Продовжити розслідування'}));
     card.appendChild(grid);
-  } else if(m.kind==='reportCopied'){
-    card.appendChild(textEl('h2',null,'Звіт скопійовано'));
-    card.appendChild(textEl('p',null,'Надішли цей код учителю або встав його у кабінет учителя (?teacher=1).'));
-    card.appendChild(el('button',{class:'btn',onclick:closeModal,text:'Готово'}));
-  } else if(m.kind==='reportCopyFallback'){
-    card.appendChild(textEl('h2',null,'Скопіюй звіт'));
-    card.appendChild(textEl('p',null,'Автоматичне копіювання недоступне. Виділи код нижче та скопіюй його.'));
-    const ta=el('textarea',{class:'report-code',value:m.code}); ta.value=m.code; card.appendChild(ta);
-    card.appendChild(el('button',{class:'btn',onclick:closeModal,text:'Готово'}));
   } else if(m.kind==='resetConfirm'){
     card.appendChild(textEl('h2',null,'Почати заново?'));
     card.appendChild(el('div',{class:'confirm-box'},[textEl('p',null,'Ти точно хочеш почати розслідування спочатку? Весь прогрес буде втрачено.')]));
@@ -2089,76 +1448,33 @@ function openPuzzle(locationId, obj, mode){
 function closePuzzle(){ activePuzzle = null; render(); }
 
 function computePuzzleDisplay(){
-  const p = activePuzzle;
-  const v = p.variant;
-  if(p.mode === 'ruler'){
-    return { story: p.obj.storyIn, question: `Відрізок має довжину ${v.base} см.\nДругий відрізок у 2 рази довший.\nЯка його довжина?`, type:'input', answer: v.a, h1:'Подумай, що означає «у 2 рази довший».', h2:`${v.base} × 2 = ${v.a}.` };
-  }
-  if(p.mode === 'sequence'){
-    const seqStr = v.seq.join(', ');
-    return { story: p.obj.storyIn, question: `${seqStr}, ?`, type:'input', answer: v.a, h1:'Подивись, на скільки збільшується кожне наступне число.', h2:`Крок між числами: ${v.seq[1]-v.seq[0]}.` };
-  }
-  if(p.mode === 'percent'){
-    return { story: p.obj.storyIn, question: `${v.pct}% від ${v.of} = ?`, type:'input', answer: v.a, h1: v.h1 || 'Спробуй спочатку знайти 10% від числа.', h2: v.h2 || `${v.pct}% від ${v.of} = ${v.a}.` };
-  }
-  if(p.mode === 'safe'){
-    return { story: p.obj.storyIn, question: v.clue, type:'input', answer: v.a, h1:'Перевір кожну умову по черзі.', h2:`Число, що підходить під усі умови: ${v.a}.` };
-  }
-  if(p.mode === 'triple'){
-    const task = v[p.tripleIndex];
-    return { story: `Задача ${p.tripleIndex+1} з 3`, question: task.q, type: task.type==='mcq' ? 'mcq' : 'input', options: task.options, answer: task.a, h1:'Розв\u2019яжи крок за кроком.', h2:'Перевір обчислення ще раз.' };
-  }
-  // input_or_mcq — classroom/corridor style puzzles from pools
-  if(v.type === 'mcq'){
-    return { story: p.obj.storyIn, question: v.q, type:'mcq', options: v.options, answer: v.a, h1: v.h1, h2: v.h2 };
-  }
-  if(v.sq !== undefined){
-    const seq = v.seq;
-    const lines = seq.map(n=>`${n} → ${n*n}`).join(',  ');
-    const nextN = seq[seq.length-1]+1;
-    return { story: p.obj.storyIn, question: `${lines},  ${nextN} → ?`, type:'input', answer: v.a, h1:v.h1, h2:v.h2 };
-  }
-  if(v.now !== undefined){
-    return { story: p.obj.storyIn, question: `Зараз ${v.now}.\nСкільки хвилин залишилося до ${v.target}?`, type:'input', answer: v.a, h1:'Полічи хвилини до найближчої рівної години.', h2:`До ${v.target} залишилось ${v.a} хвилин.` };
-  }
-  if(v.start !== undefined){
-    const a1=v.start, a2=v.start+v.step, a3=v.start+2*v.step, a4=v.start+3*v.step;
-    return { story: p.obj.storyIn, question: `${a1}, ${a2}, ${a3}, ${a4}, ?`, type:'input', answer: v.a, h1:'Подивись, на скільки збільшується кожне наступне число.', h2:`Кожного разу додається ${v.step}.` };
-  }
-  return { story: p.obj.storyIn, question: v.q, type:'input', answer: v.a, h1: v.h1, h2: v.h2 };
+  const p=activePuzzle, v=p.variant;
+  if(p.mode==='ruler') return {story:p.obj.storyIn,question:`Відрізок має довжину ${v.base} см. Другий відрізок у 3 рази довший. Яка його довжина?`,type:'input',answer:v.a,h1:v.h1,h2:v.h2};
+  if(p.mode==='sequence') return {story:p.obj.storyIn,question:`${v.seq.join(' → ')} → ?`,type:'input',answer:v.a,h1:v.h1,h2:v.h2};
+  if(p.mode==='percent') return {story:p.obj.storyIn,question:`${v.pct}% від ${v.of} = ?`,type:'input',answer:v.a,h1:v.h1,h2:v.h2};
+  if(p.mode==='safe') return {story:p.obj.storyIn,question:v.clue,type:'input',answer:v.a,h1:'Перевір кожну умову по черзі.',h2:`Підходить число ${v.a}.`};
+  if(p.mode==='triple'){ const task=v[p.tripleIndex]; return {story:`Замок ${p.tripleIndex+1} із 3`,question:task.q,type:task.type||'input',options:task.options,answer:task.a,h1:'Розв’яжи задачу крок за кроком.',h2:'Перевір обчислення ще раз.'}; }
+  return {story:p.obj.storyIn,question:v.q,type:v.type||'input',options:v.options,answer:v.a,h1:v.h1,h2:v.h2};
 }
 
-function checkAnswer(userValue, display){
-  if(display.type === 'mcq') return userValue === display.answer;
-  const num = parseFloat(String(userValue).replace(',', '.').trim());
-  return !isNaN(num) && num === display.answer;
+function checkAnswer(userValue,display){
+  if(display.type==='mcq') return String(userValue).trim()===String(display.answer).trim();
+  const raw=String(userValue).trim().replace(',','.');
+  const num=Number(raw); return Number.isFinite(num) && num===Number(display.answer);
 }
 
 function onPuzzleSubmit(userValue){
-  const p = activePuzzle;
-  const display = computePuzzleDisplay();
-  const ok = checkAnswer(userValue, display);
-  ensureStats(state);
-  state.stats.attempts++;
-  const h = state.stats.taskHistory[p.objId] || {attempts:0,correct:0,hints:0};
-  h.attempts++;
-  state.stats.taskHistory[p.objId] = h;
+  const p=activePuzzle, display=computePuzzleDisplay(), ok=checkAnswer(userValue,display);
+  const id=p.objId;
+  state.attemptsTotal++;
+  state.taskStats[id]=state.taskStats[id]||{attempts:0,correct:0,hints:0};
+  state.taskStats[id].attempts++;
   if(ok){
-    state.stats.correct++; h.correct++;
-    SFX.correct();
-    p.wrong = false;
-    if(p.mode === 'triple' && p.tripleIndex < p.variant.length - 1){
-      p.tripleIndex++;
-      render();
-      return;
-    }
+    SFX.correct(); state.correctTotal++; state.taskStats[id].correct++;
+    p.wrong=false;
+    if(p.mode==='triple' && p.tripleIndex<p.variant.length-1){ p.tripleIndex++; render(); return; }
     finishPuzzleSuccess();
-  } else {
-    SFX.wrong();
-    state.stats.wrong++;
-    p.wrong = true;
-    render();
-  }
+  } else { SFX.wrong(); p.wrong=true; render(); }
 }
 
 function finishPuzzleSuccess(){
@@ -2172,14 +1488,7 @@ function finishPuzzleSuccess(){
   if(obj.id === 'bloknot') state.mapFragments++;
   if(obj.id === 'skrynya') SFX.chest();
 
-  if(obj.giveLetter){
-    state.letters.push(obj.giveLetter);
-    if(obj.giveLetter==='П') addMilestone('letter_П');
-    if(obj.giveLetter==='А' && !state.milestones.includes('letter_А1')) addMilestone('letter_А1');
-    else if(obj.giveLetter==='А') addMilestone('letter_А2');
-    if(obj.giveLetter==='Р') addMilestone('letter_Р');
-    if(obj.giveLetter==='Т') addMilestone('letter_Т');
-  }
+  if(obj.giveLetter){ state.letters.push(obj.giveLetter); if(obj.id==='parta') addMilestone('letter_П'); if(obj.id==='shafa') addMilestone('letter_А1'); if(obj.id==='kartyna') addMilestone('letter_Р'); if(obj.id==='korobka') addMilestone('letter_Т'); if(obj.id==='skrynya') addMilestone('letter_А2'); }
   if(obj.id === 'ryukzak') addMilestone('clue_ryukzak');
   if(obj.note && !state.notes.includes(obj.note)) state.notes.push(obj.note);
 
@@ -2188,7 +1497,7 @@ function finishPuzzleSuccess(){
 
 function useHint(){
   const p = activePuzzle;
-  if(p.hintLevel < 2){ p.hintLevel++; state.hintsUsedTotal++; ensureStats(state); const h=state.stats.taskHistory[p.objId] || {attempts:0,correct:0,hints:0}; h.hints++; state.stats.taskHistory[p.objId]=h; }
+  if(p.hintLevel < 2){ p.hintLevel++; state.hintsUsedTotal++; state.taskStats[p.objId]=state.taskStats[p.objId]||{attempts:0,correct:0,hints:0}; state.taskStats[p.objId].hints++; }
   render();
 }
 
@@ -2388,7 +1697,6 @@ function renderFinalReveal(){
    --------------------------------------------------------------------- */
 function renderVictory(){
   state.isGameCompleted = true;
-  state.completedAt = state.completedAt || Date.now();
   const wrap = el('div',{class:'screen'});
   const panel = el('div',{class:'panel'});
   panel.appendChild(textEl('div','victory-badge','🎉'));
@@ -2428,7 +1736,7 @@ function startIdleWatcher(){
    Boot
    --------------------------------------------------------------------- */
 function boot(){
-  if(TEACHER_MODE){ render(); return; }
+  try{ if(new URLSearchParams(window.location.search).get('teacher')==='1'){ state=freshState(); state.screen='TEACHER_DASHBOARD'; render(); return; } }catch(e){}
   const saved = loadState();
   if(saved && saved.isGameCompleted){
     state = Object.assign(freshState(), saved);
