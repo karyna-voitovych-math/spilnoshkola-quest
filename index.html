@@ -5,152 +5,172 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Таємниця зниклого Спільношколярика</title>
 <style>
-:root{--orange:#F88010;--gray:#575551;--green:#98C932;--bg:#FAF9F6;--white:#fff}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--gray);font-family:Arial,sans-serif}
-button,input{font:inherit}
-.screen{min-height:100vh;padding:28px 18px 50px}
-.wrap{max-width:980px;margin:auto}
-h1,h2,h3{margin:0 0 12px}
-h1{font-size:clamp(28px,5vw,48px);color:var(--orange)}
-h2{font-size:clamp(23px,4vw,34px)}
-p{line-height:1.5}
-.card{background:var(--white);border-radius:24px;padding:26px;box-shadow:0 8px 28px rgba(87,85,81,.10);margin:18px 0}
-.scene{width:100%;border-radius:20px;display:block;margin:0 0 22px;pointer-events:none}
-.top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
-.badge{display:inline-block;background:#eef6dd;color:#56751d;padding:8px 12px;border-radius:999px;font-weight:700}
-.level{border:2px solid #eeeae4;border-radius:18px;padding:20px;margin-top:16px}
-.level.locked{opacity:.5}
-.level.done{border-color:var(--green)}
-.level-title{font-weight:800;font-size:20px;margin-bottom:10px}
-.task{font-size:19px;margin:10px 0 16px}
-.options{display:grid;gap:10px}
-.option,.primary{border:0;border-radius:13px;padding:12px 16px;cursor:pointer;background:#f2f0ec;color:var(--gray);text-align:left}
-.option:hover{transform:translateY(-1px)}
-.primary{background:var(--orange);color:white;font-weight:800;text-align:center}
-.feedback{margin-top:10px;font-weight:700;min-height:24px}
-input.answer{width:100%;max-width:320px;padding:12px 14px;border:2px solid #ddd7ce;border-radius:12px;margin-bottom:10px}
-.letter{font-size:28px;font-weight:900;color:var(--orange);text-align:center;margin-top:12px}
-.next{display:none;margin-top:16px}
-.final{text-align:center}
-.final-word{font-size:34px;letter-spacing:7px;font-weight:900;color:var(--orange);margin:18px 0}
-.small{font-size:14px;color:#777}
-.hidden{display:none!important}
-.start{max-width:760px;text-align:center;margin:8vh auto}
-.story{font-size:19px}
+:root{--o:#F88010;--g:#575551;--l:#98C932;--b:#FAF9F6}
+*{box-sizing:border-box}body{margin:0;background:var(--b);color:var(--g);font-family:Arial,sans-serif}
+main{min-height:100vh;padding:28px 18px 60px}.wrap{max-width:900px;margin:auto}
+.card{background:#fff;border-radius:22px;padding:24px;margin:18px 0;box-shadow:0 7px 25px #57555118}
+h1{color:var(--o);font-size:clamp(28px,5vw,46px);margin:0 0 14px}h2{font-size:30px;margin:0 0 10px}
+p{font-size:18px;line-height:1.5}.scene{width:100%;display:block;border-radius:18px;pointer-events:none}
+.level{border:2px solid #ebe7e1;border-radius:18px;padding:20px;margin:14px 0}
+.level.locked{opacity:.45}.level.done{border-color:var(--l)}
+.title{font-size:20px;font-weight:800;margin-bottom:12px}
+.task{font-size:20px;font-weight:600;margin:14px 0}
+input{width:min(100%,360px);padding:12px;border:2px solid #ddd6cd;border-radius:11px;font-size:18px}
+button{border:0;border-radius:11px;padding:12px 18px;font-size:17px;font-weight:700;cursor:pointer}
+.check{background:var(--o);color:white;margin-left:6px}.next{background:var(--l);color:white;margin-top:14px}
+.feedback{min-height:25px;margin-top:10px;font-weight:700}
+.badge{display:inline-block;background:#eff7dd;padding:7px 11px;border-radius:99px;font-weight:700}
+.start{text-align:center;max-width:720px;margin:8vh auto}.center{text-align:center}
+.letter{font-size:30px;color:var(--o);font-weight:900}
 </style>
 </head>
 <body>
 <div id="app"></div>
 <script>
-const rooms=[
- {name:"Клас",image:"assets/classroom.png",letter:"П",levels:[
-  {title:"Рівень 1. Множення та ділення",tasks:[
-   ["6 × 7 = ?",42],["56 ÷ 8 = ?",7],["9 × 8 = ?",72],["63 ÷ 9 = ?",7],["7 × 6 = ?",42],["72 ÷ 8 = ?",9]]},
-  {title:"Рівень 2. Дроби",tasks:[
-   ["2/7 + 3/7 = ?",5/7],["6/9 − 2/9 = ?",4/9],["1/8 + 5/8 = ?",6/8],["7/10 − 3/10 = ?",4/10],["3/11 + 4/11 = ?",7/11]]},
-  {title:"Рівень 3. Легкі рівняння",tasks:[
-   ["x + 17 = 25. Знайди x.",8],["x − 9 = 14. Знайди x.",23],["4x = 28. Знайди x.",7],["x/5 = 6. Знайди x.",30],["32 − x = 19. Знайди x.",13]]}
- ]},
- {name:"Коридор",image:"assets/corridor.png",letter:"А",levels:[
-  {title:"Рівень 1. Геометрія",tasks:[
-   ["У трикутника два кути 50° і 60°. Третій кут — ?",70],
-   ["Прямий кут — ? градусів",90],["Скільки сторін має шестикутник?",6],
-   ["Периметр квадрата зі стороною 5 см — ?",20]]},
-  {title:"Рівень 2. Вимірювання і час",tasks:[
-   ["3 м = ? см",300],["2 км = ? м",2000],["5 дм = ? см",50],
-   ["1 год 20 хв = ? хв",80],["90 хв = ? год ? хв. Введи загальну кількість хвилин.",90]]}
- ]},
- {name:"Кабінет",image:"assets/office.png",letter:"Т",levels:[
-  {title:"Рівень 1. Відсотки",tasks:[
-   ["10% від 80 = ?",8],["25% від 40 = ?",10],["50% від 36 = ?",18],
-   ["20% від 150 = ?",30],["5% від 200 = ?",10]]},
-  {title:"Рівень 2. Частина числа і дроби",tasks:[
-   ["3/4 від 20 = ?",15],["2/5 від 30 = ?",12],["1/3 від 27 = ?",9],
-   ["5/6 від 24 = ?",20],["3/8 від 32 = ?",12]]}
- ]},
- {name:"Таємна кімната",image:"assets/secret-room.png",letter:"А",levels:[
-  {title:"Рівень 1. Логічний код",tasks:[
-   ["Знайди число: воно парне, більше за 20, менше за 30 і ділиться на 4.",24],
-   ["Знайди число: воно непарне, більше за 30, менше за 40 і ділиться на 5.",35],
-   ["Знайди число: воно парне, більше за 40, менше за 50 і ділиться на 3.",42]]},
-  {title:"Рівень 2. Логічна задача",tasks:[
-   ["У коробці було кілька олівців. Додали ще 7 — стало 19. Скільки було спочатку?",12],
-   ["У класі 24 учні. 1/3 пішли до бібліотеки. Скільки залишилося в класі?",16],
-   ["Було число. Його помножили на 3 і отримали 45. Яке це число?",15]]}
- ]}
+"use strict";
+
+const rooms = [
+  {
+    name:"Клас", image:"assets/classroom.png", letter:"П",
+    levels:[
+      {name:"Рівень 1. Множення та ділення", tasks:[
+        ["6 × 7 = ?",42],["56 ÷ 8 = ?",7],["9 × 8 = ?",72],["63 ÷ 9 = ?",7],["7 × 6 = ?",42]
+      ]},
+      {name:"Рівень 2. Дроби", tasks:[
+        ["2/7 + 3/7 = ?","5/7"],["6/9 − 2/9 = ?","4/9"],["1/8 + 5/8 = ?","6/8"],["7/10 − 3/10 = ?","4/10"]
+      ]},
+      {name:"Рівень 3. Легкі рівняння", tasks:[
+        ["x + 17 = 25. Знайди x.",8],["x − 9 = 14. Знайди x.",23],["4x = 28. Знайди x.",7],["x / 5 = 6. Знайди x.",30]
+      ]}
+    ]
+  },
+  {
+    name:"Коридор", image:"assets/corridor.png", letter:"А",
+    levels:[
+      {name:"Рівень 1. Геометрія", tasks:[
+        ["У трикутника два кути 50° і 60°. Третій кут — ?",70],
+        ["Прямий кут — ? градусів",90],["Скільки сторін має шестикутник?",6],
+        ["Периметр квадрата зі стороною 5 см — ?",20]
+      ]},
+      {name:"Рівень 2. Вимірювання і час", tasks:[
+        ["3 м = ? см",300],["2 км = ? м",2000],["5 дм = ? см",50],
+        ["1 год 20 хв = ? хв",80],["90 хв = ? хв",90]
+      ]}
+    ]
+  },
+  {
+    name:"Кабінет", image:"assets/office.png", letter:"Т",
+    levels:[
+      {name:"Рівень 1. Відсотки", tasks:[
+        ["10% від 80 = ?",8],["25% від 40 = ?",10],["50% від 36 = ?",18],
+        ["20% від 150 = ?",30],["5% від 200 = ?",10]
+      ]},
+      {name:"Рівень 2. Частина числа і дроби", tasks:[
+        ["3/4 від 20 = ?",15],["2/5 від 30 = ?",12],["1/3 від 27 = ?",9],
+        ["5/6 від 24 = ?",20],["3/8 від 32 = ?",12]
+      ]}
+    ]
+  },
+  {
+    name:"Таємна кімната", image:"assets/secret-room.png", letter:"А",
+    levels:[
+      {name:"Рівень 1. Логічний код", tasks:[
+        ["Число парне, більше за 20, менше за 30 і ділиться на 4. Яке це число?",24],
+        ["Число непарне, більше за 30, менше за 40 і ділиться на 5. Яке це число?",35]
+      ]},
+      {name:"Рівень 2. Логічні задачі", tasks:[
+        ["У коробці було кілька олівців. Додали 7 — стало 19. Скільки було спочатку?",12],
+        ["У класі 24 учні. 1/3 пішли до бібліотеки. Скільки залишилося?",16]
+      ]}
+    ]
+  }
 ];
 
-let roomIndex=0, levelIndex=0, taskIndex=0, started=false;
-const app=document.getElementById("app");
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+let room=0, level=0, task=0;
+
+function app(){return document.getElementById("app");}
+function clean(v){return String(v).trim().replace(",",".").replace(/\s+/g,"");}
+
 function start(){
- started=true; renderRoom();
+  room=0; level=0; task=0;
+  render();
 }
+
 function renderStart(){
- app.innerHTML=`<main class="screen"><div class="card start">
- <h1>Таємниця зниклого Спільношколярика</h1>
- <p class="story">Спільношколярик зник! Кажуть, він десь у школі, але залишив після себе математичні сліди.</p>
- <p class="story">Досліджуй кімнати, проходь рівні та збирай літери. Тут немає змагання — важливо лише дійти до кінця.</p>
- <button class="primary" onclick="start()">Почати квест</button>
- </div></main>`;
+  app().innerHTML = `
+  <main><div class="card start">
+    <h1>Таємниця зниклого Спільношколярика</h1>
+    <p>Спільношколярик зник! Кажуть, він десь у школі, а знайти його можна лише пройшовши математичні рівні.</p>
+    <p>Працюй у своєму темпі. Тут немає змагання — важливо лише розв'язувати завдання та збирати літери.</p>
+    <button class="check" onclick="start()">Почати квест</button>
+  </div></main>`;
 }
-function renderRoom(){
- const r=rooms[roomIndex];
- const levels=r.levels.map((lv,i)=>`
-  <section class="level ${i<levelIndex?'done':''} ${i>levelIndex?'locked':''}">
-   <div class="level-title">${esc(lv.title)}</div>
-   ${i===levelIndex?renderTask(lv):i<levelIndex?`<p>Рівень завершено ✓</p>`:`<p>Спочатку заверши попередній рівень.</p>`}
-  </section>`).join("");
- app.innerHTML=`<main class="screen"><div class="wrap">
-  <div class="top"><div><h2>${esc(r.name)}</h2><span class="badge">Літера за кімнату: ${r.letter}</span></div>
-  <div class="badge">Кімната ${roomIndex+1} / ${rooms.length}</div></div>
-  <div class="card"><img class="scene" src="${r.image}" alt="${esc(r.name)}"></div>
-  <div class="card"><h3>Твої рівні</h3>${levels}
-  <button id="nextRoom" class="primary next" onclick="nextRoom()">Перейти далі →</button></div>
- </div></main>`;
+
+function render(){
+  if(room>=rooms.length){renderFinal();return;}
+  const r=rooms[room];
+  let levels="";
+  for(let i=0;i<r.levels.length;i++){
+    const lv=r.levels[i];
+    let content="";
+    if(i<level) content="<p>Рівень завершено ✓</p>";
+    else if(i>level) content="<p>Спочатку заверши попередній рівень.</p>";
+    else content=renderTask(lv);
+    levels+=`<section class="level ${i<level?"done":""} ${i>level?"locked":""}">
+      <div class="title">${lv.name}</div>${content}</section>`;
+  }
+  app().innerHTML=`<main><div class="wrap">
+    <div class="card"><h2>${r.name}</h2><span class="badge">Кімната ${room+1} з ${rooms.length}</span></div>
+    <div class="card"><img class="scene" src="${r.image}" alt="${r.name}"></div>
+    <div class="card"><h2>Рівні</h2>${levels}</div>
+  </div></main>`;
 }
+
 function renderTask(lv){
- const t=lv.tasks[taskIndex];
- return `<div class="task">${esc(t[0])}</div>
- <input id="answer" class="answer" autocomplete="off" inputmode="decimal" placeholder="Введи відповідь">
- <button class="primary" onclick="check()">Перевірити</button>
- <div id="feedback" class="feedback"></div>`;
+  const t=lv.tasks[task];
+  return `<div class="task">${t[0]}</div>
+    <input id="answer" type="text" inputmode="decimal" autocomplete="off" placeholder="Введи відповідь">
+    <button class="check" onclick="check()">Перевірити</button>
+    <div id="feedback" class="feedback"></div>`;
 }
-function normalize(v){return String(v).trim().replace(",",".").replace(/\s+/g,"");}
+
 function check(){
- const input=document.getElementById("answer"), fb=document.getElementById("feedback");
- if(!input||!fb)return;
- const got=normalize(input.value), expected=normalize(rooms[roomIndex].levels[levelIndex].tasks[taskIndex][1]);
- if(got===expected){
-  fb.textContent="Правильно! ✓"; fb.style.color="#6a8d21";
-  taskIndex++;
-  setTimeout(()=>{
-   if(taskIndex<rooms[roomIndex].levels[levelIndex].tasks.length) renderRoom();
-   else { levelIndex++; taskIndex=0;
-    if(levelIndex<rooms[roomIndex].levels.length) renderRoom();
-    else { document.getElementById("nextRoom").style.display="block"; renderRoom(); showNext(); }
-   }
-  },350);
- }else fb.textContent="Спробуй ще раз 🙂";
+  const input=document.getElementById("answer");
+  const feedback=document.getElementById("feedback");
+  const expected=clean(rooms[room].levels[level].tasks[task][1]);
+  if(clean(input.value)===expected){
+    feedback.textContent="Правильно! ✓";
+    feedback.style.color="#6b8c24";
+    task++;
+    if(task>=rooms[room].levels[level].tasks.length){
+      level++;
+      task=0;
+      setTimeout(()=>{
+        if(level>=rooms[room].levels.length){
+          room++; level=0;
+          if(room>=rooms.length) renderFinal();
+          else render();
+        } else render();
+      },300);
+    } else setTimeout(render,300);
+  }else{
+    feedback.textContent="Спробуй ще раз 🙂";
+    feedback.style.color="#d46b20";
+    input.focus();
+  }
 }
-function showNext(){
- const b=document.getElementById("nextRoom"); if(b)b.style.display="block";
-}
-function nextRoom(){
- roomIndex++; levelIndex=0; taskIndex=0;
- if(roomIndex<rooms.length) renderRoom(); else renderFinal();
-}
+
 function renderFinal(){
- app.innerHTML=`<main class="screen"><div class="card final wrap">
- <h1>Вау! Клас! 🎉</h1>
- <p class="story">Ти пройшов усі математичні рівні та зібрав усі літери.</p>
- <div class="final-word">ПАРТА</div>
- <p class="story">Секретне слово відкриває останню підказку: сильний Спільношколярик ховався саме біля парти у таємній кімнаті!</p>
- <h2>Ти завершив квест! 💚</h2>
- <p>Ти уважно досліджував, міркував і знаходив рішення. Супер робота!</p>
- </div></main>`;
+  app().innerHTML=`<main><div class="card start">
+    <h1>Вау! Клас! 🎉</h1>
+    <p>Ти пройшов усі математичні рівні та зібрав усі літери.</p>
+    <div class="letter">ПАРТА</div>
+    <p>Сильний Спільношколярик ховався у таємній кімнаті біля парти!</p>
+    <h2>Ти завершив квест!</h2>
+    <p>Ти уважно досліджував, міркував і знаходив рішення. Супер робота! 💚</p>
+  </div></main>`;
 }
+
 renderStart();
 </script>
 </body>
