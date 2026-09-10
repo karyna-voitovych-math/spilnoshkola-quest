@@ -303,6 +303,12 @@ a:focus-visible{
   font-size:.72rem; white-space:nowrap; opacity:0; pointer-events:none;
 }
 .scene-hotspot:hover .hotspot-label,.scene-hotspot:focus-visible .hotspot-label{opacity:1}
+.scene-clues-layer{position:absolute;inset:0;z-index:5;pointer-events:none;}
+.scene-clue{position:absolute;left:0;top:0;width:var(--w);height:var(--h);transform:translate(-50%,-50%) rotate(-2deg);pointer-events:auto;border:0;border-radius:7px;padding:0 7px;background:#fffaf0;box-shadow:0 4px 12px rgba(0,0,0,.16);font:700 .72rem/1.15 Inter,system-ui,sans-serif;color:#575551;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s ease,box-shadow .15s ease;}
+.scene-clue::before{content:'';position:absolute;top:-5px;right:12px;width:18px;height:8px;border-radius:3px;background:rgba(248,128,16,.75);transform:rotate(4deg);}
+.scene-clue:hover,.scene-clue:focus-visible{transform:translate(-50%,-50%) rotate(0deg) scale(1.05);box-shadow:0 7px 18px rgba(0,0,0,.22);outline:3px solid rgba(248,128,16,.25);}
+.scene-clue.clue-lime::before{background:rgba(152,201,50,.9);}
+.clue-paper-text{white-space:nowrap;}
 .dashboard{max-width:1100px; width:100%; text-align:left}
 .dashboard .panel{max-width:none}
 .dashboard-head{display:flex; justify-content:space-between; gap:14px; align-items:center; flex-wrap:wrap}
@@ -585,7 +591,7 @@ const BOY_PORTRAIT = "data:image/webp;base64,UklGRgpXAABXRUJQVlA4WAoAAAAQAAAAVQE
 </script>
 <script>
 /* ==========================================================================
-   ТАЄМНИЦЯ ЗНИКЛОГО СПІЛЬНОШКОЛЯРИКА — game data
+   ТАЄМНИЦЯ ЗНИКЛОГО СПІЛЬНОШКОЛЯРИКА — FINAL game data
    Puzzle pools, dialogue, jokes, scene/object definitions.
    Edit this file to change math tasks, story text, or add new content.
    ========================================================================== */
@@ -767,7 +773,7 @@ const SCENES = {
     objects:[
       {id:'parta', icon:'📝', label:'Парта', kind:'puzzle', pool:'parta', storyIn:'На парті лежить відкритий зошит. На сторінці — обчислення.', storyOut:'У зошиті була захована картка з літерою.', giveLetter:'П'},
       {id:'shafa', icon:'📚', label:'Книжкова шафа', kind:'puzzle', pool:'shafa', storyIn:'Між книжками захована задача на дроби.', storyOut:'За книжкою лежить картка з літерою.', giveLetter:'А'},
-      {id:'rostlina', icon:'🪴', label:'Рослина', kind:'puzzle', pool:'rostlina', storyIn:'На горщику записана числова послідовність.', storyOut:'Ти розгадав закономірність.'},
+      {id:'rostlina', icon:'🪴', label:'Рослина', kind:'puzzle', pool:'rostlina', storyIn:'На маленькій записці біля рослини записана числова послідовність. Здається, це один зі слідів Спільношколярика.', storyOut:'Ти розгадав закономірність.'},
       {id:'godynnyk', icon:'🕐', label:'Годинник', kind:'puzzle', pool:'godynnyk', storyIn:'Годинник зупинився на дивному часі. Можливо, це не випадково.', storyOut:'Тепер час показує правильну відповідь.'},
       {id:'ryukzak', icon:'🎒', label:'Рюкзак', kind:'puzzle', pool:'ryukzak', storyIn:'Це рюкзак Спільношколярика. Усередині — задача про частину від числа.', storyOut:'У кишені записка: «Шукай далі там, де всі проходять, але ніхто не затримується.»', note:'Шукай далі там, де всі проходять, але ніхто не затримується.'},
       {id:'vikno', icon:'🪟', label:'Вікно', kind:'puzzle', pool:'vikno', storyIn:'На склі видно короткий числовий запис. Це схоже на математичний код.', storyOut:'Код розшифровано.'},
@@ -1497,7 +1503,7 @@ function makeStudentReport(){
   const solved = solvedCoreTaskCount();
   const total = coreTaskCount();
   return {
-    version:2, studentId:STUDENT_ID, agentName:state.agentName || (STUDENT_ID ? `АГЕНТ №${STUDENT_ID}` : 'Без номера'),
+    version:3, studentId:STUDENT_ID, agentName:state.agentName || (STUDENT_ID ? `АГЕНТ №${STUDENT_ID}` : 'Без номера'),
     seed:state.seed, progress:state.isGameCompleted?100:Math.round(solved/total*100), solved, total,
     attempts:state.stats.attempts, correct:state.stats.correct, wrong:state.stats.wrong, hints:state.hintsUsedTotal||0,
     location:state.currentLocation, completed:!!state.isGameCompleted,
@@ -1521,7 +1527,7 @@ function renderTeacherDashboard(){
   const headActions=el('div',{});
   headActions.appendChild(el('button',{class:'btn btn-secondary btn-sm',onclick:()=>{location.reload();},text:'Оновити'}));
   head.appendChild(headActions); panel.appendChild(head);
-  panel.appendChild(textEl('p','tagline','Учні надсилають сюди свій звіт після гри. Немає рейтингів — лише прогрес і статистика.'));
+  panel.appendChild(textEl('p','tagline','Учні надсилають сюди свій звіт після гри. Немає рейтингів — лише прогрес, точність, спроби та підказки.'));
   const stats=el('div',{class:'dashboard-grid'});
   const avg=reports.length?Math.round(reports.reduce((s,r)=>s+(r.progress||0),0)/reports.length):0;
   const done=reports.filter(r=>r.completed).length;
@@ -1533,7 +1539,7 @@ function renderTeacherDashboard(){
   const importRow=el('div',{class:'modal-actions'});
   importRow.appendChild(el('button',{class:'btn',onclick:()=>{
     const r=reportDecode(ta.value);
-    if(!r || r.version!==2){ alert('Не вдалося прочитати звіт. Скопіюй код ще раз повністю.'); return; }
+    if(!r || r.version!==3){ alert('Не вдалося прочитати звіт. Скопіюй код ще раз повністю.'); return; }
     const list=getTeacherReports().filter(x=>String(x.studentId)!==String(r.studentId)); list.push(r); setTeacherReports(list); ta.value=''; renderTeacherDashboard().scrollIntoView({block:'start'}); location.reload();
   },text:'Додати звіт'}));
   importRow.appendChild(el('button',{class:'btn btn-secondary btn-sm',onclick:()=>{setTeacherReports([]);location.reload();},text:'Очистити всі звіти'}));
@@ -1723,28 +1729,67 @@ function renderAgentSetup(){
 function sceneHotspots(sceneId){
   const maps = {
     classroom:{
-      parta:[54,78,28,18], shafa:[28,34,18,45], rostlina:[76,55,13,22], godynnyk:[84,13,11,14],
-      ryukzak:[37,72,12,20], vikno:[8,38,13,60], smitnyk:[93,62,8,18], doshka:[64,31,38,30]
+      // Coordinates are percentages of the supplied 1536×1024 classroom illustration.
+      // Hotspots sit over the real objects, not over an artificial SVG scene.
+      parta:[66,66,22,18], shafa:[25,35,16,43], rostlina:[18,45,12,22], godynnyk:[84,13,10,14],
+      ryukzak:[36,72,12,22], vikno:[9,34,17,61], smitnyk:[90,61,10,20], doshka:[59,29,36,28]
     },
     corridor:{
-      dzvinok:[72,14,9,13], kartyna:[8,28,10,28], plakat:[27,31,10,27], lavka:[20,72,19,15],
-      vognegasnyk:[57,40,7,17], vishak:[64,43,10,23], doshka_ogoloshen:[39,33,17,32], plakat_fact:[41,33,16,32]
+      dzvinok:[82,9,8,12], kartyna:[28,33,11,23], plakat:[36,48,16,30], lavka:[22,70,22,18],
+      vognegasnyk:[56,40,6,18], vishak:[18,63,13,25], doshka_ogoloshen:[36,47,17,30], plakat_fact:[72,44,12,24]
     },
     office:{
-      kalkulyator:[50,67,12,12], liniyka:[48,73,25,9], bloknot:[38,66,15,13], computer:[32,69,17,22],
-      korobka:[64,69,15,16], karta:[70,43,17,24], seif:[88,61,12,28]
+      kalkulyator:[51,65,10,10], liniyka:[39,74,25,7], bloknot:[40,68,14,12], computer:[30,64,18,22],
+      korobka:[62,65,16,14], karta:[49,44,20,25], seif:[92,70,10,30]
     },
     secretroom:{
-      zapiska:[40,28,11,10], skrynya:[78,77,25,22], polytsya:[16,40,17,65], stil2:[60,67,28,20],
-      shafa2:[27,35,22,58], korobka2:[92,83,12,16], vikno2:[60,22,18,20], parta2:[52,66,40,28]
+      zapiska:[59,36,11,10], skrynya:[61,66,20,16], polytsya:[12,38,15,60], stil2:[49,62,40,28],
+      shafa2:[31,34,19,52], korobka2:[92,86,12,16], vikno2:[57,18,17,19], parta2:[49,63,42,29]
     }
   };
   return maps[sceneId] || {};
 }
+function sceneVisualClues(sceneId){
+  // Small, story-like clues placed over the supplied room illustrations.
+  // They are intentionally subtle: no object labels, no cards, no emoji scenery.
+  const clues = {
+    classroom: [
+      {id:'plant-sequence-clue', x:18, y:48, w:12, h:8, text:'3 → 6 → 12 → 24 → ?', target:'rostlina', tone:'orange'}
+    ],
+    corridor: [
+      {id:'geometry-clue', x:28, y:36, w:12, h:8, text:'△  50°  60°  ?', target:'kartyna', tone:'lime'}
+    ],
+    office: [
+      {id:'box-clue', x:62, y:59, w:12, h:8, text:'3 замки', target:'korobka', tone:'orange'}
+    ],
+    secretroom: [
+      {id:'final-clue', x:49, y:48, w:14, h:8, text:'ЗБЕРИ ЛІТЕРИ', target:'stil2', tone:'lime'}
+    ]
+  };
+  return clues[sceneId] || [];
+}
+
+function renderVisualClues(scene){
+  const layer = el('div',{class:'scene-clues-layer','aria-hidden':'false'});
+  sceneVisualClues(scene.id).forEach(clue=>{
+    const b=el('button',{
+      class:'scene-clue '+(clue.tone==='lime'?'clue-lime':'clue-orange'),
+      style:`left:${clue.x}%;top:${clue.y}%;--w:${clue.w}%;--h:${clue.h}%;`,
+      'aria-label':clue.text,
+      title:'Знайдено слід',
+      onclick:()=>{ touchInteraction(); const target=scene.objects.find(o=>o.id===clue.target); if(target) handleObjectClick(scene.id,target); }
+    });
+    b.appendChild(textEl('span','clue-paper-text',clue.text));
+    layer.appendChild(b);
+  });
+  return layer;
+}
+
 function renderImageScene(scene){
   const wrap = el('div',{class:'scene-image-wrap'});
   const img = el('img',{class:'scene-image', src:scene.image, alt:scene.title});
   wrap.appendChild(img);
+  wrap.appendChild(renderVisualClues(scene));
   const maps = sceneHotspots(scene.id);
   scene.objects.forEach(obj=>{
     const c = maps[obj.id];
@@ -1810,7 +1855,7 @@ function renderTopbar(title){
 
 function renderProgressBar(){
   const wrap = el('div',{class:'progress-wrap'});
-  wrap.appendChild(textEl('div','progress-label', `Розслідування: ${progressPercent()}%`));
+  wrap.appendChild(textEl('div','progress-label', `Розслідування: ${progressPercent()}% · Завдання: ${solvedCoreTaskCount()}/${coreTaskCount()}`));
   const track = el('div',{class:'progress-track'});
   track.appendChild(el('div',{class:'progress-fill', style:`width:${progressPercent()}%`}));
   wrap.appendChild(track);
